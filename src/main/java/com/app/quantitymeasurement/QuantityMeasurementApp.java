@@ -32,4 +32,28 @@ public class QuantityMeasurementApp {
             return Double.compare(this.value, other.value) == 0;
         }
     }
+
+    public static void main(String[] args) {
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+
+        System.out.print("Enter first value in feet: ");
+        double v1 = scanner.nextDouble();
+
+        System.out.print("Enter second value in feet: ");
+        double v2 = scanner.nextDouble();
+
+        Feet f1 = new Feet(v1);
+        Feet f2 = new Feet(v2);
+
+        // System.out.println("Are equal? " + f1.equals(f2));
+        boolean result = f1.equals(f2);
+
+        if (result) {
+            System.out.println("Output: Equal (true)");
+        } else {
+            System.out.println("Output: Not Equal (false)");
+        }
+
+        scanner.close();
+    }
 }

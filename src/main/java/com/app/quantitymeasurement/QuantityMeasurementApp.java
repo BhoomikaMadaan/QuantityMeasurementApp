@@ -2,7 +2,7 @@ package com.app.quantitymeasurement;
 
 public class QuantityMeasurementApp {
 
-    // Inner class for Feet
+    // Feet class
     public static class Feet {
         private final double value;
 
@@ -13,47 +13,76 @@ public class QuantityMeasurementApp {
         @Override
         public boolean equals(Object obj) {
 
-            // 1. Same reference
             if (this == obj)
                 return true;
 
-            // 2. Null check
             if (obj == null)
                 return false;
 
-            // 3. Type check
             if (getClass() != obj.getClass())
                 return false;
 
-            // 4. Cast
             Feet other = (Feet) obj;
 
-            // 5. Compare values
             return Double.compare(this.value, other.value) == 0;
         }
     }
 
-    public static void main(String[] args) {
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
+    // Inches class
+    public static class Inches {
+        private final double value;
 
-        System.out.print("Enter first value in feet: ");
-        double v1 = scanner.nextDouble();
-
-        System.out.print("Enter second value in feet: ");
-        double v2 = scanner.nextDouble();
-
-        Feet f1 = new Feet(v1);
-        Feet f2 = new Feet(v2);
-
-        // System.out.println("Are equal? " + f1.equals(f2));
-        boolean result = f1.equals(f2);
-
-        if (result) {
-            System.out.println("Output: Equal (true)");
-        } else {
-            System.out.println("Output: Not Equal (false)");
+        public Inches(double value) {
+            this.value = value;
         }
 
-        scanner.close();
+        @Override
+        public boolean equals(Object obj) {
+
+            if (this == obj)
+                return true;
+
+            if (obj == null)
+                return false;
+
+            if (getClass() != obj.getClass())
+                return false;
+
+            Inches other = (Inches) obj;
+
+            return Double.compare(this.value, other.value) == 0;
+        }
+    }
+
+    // Feet equality method
+    public static void demonstrateFeetEquality() {
+
+        Feet f1 = new Feet(1.0);
+        Feet f2 = new Feet(1.0);
+
+        boolean result = f1.equals(f2);
+
+        System.out.println("Input: 1.0 ft and 1.0 ft");
+        System.out.println("Output: " + (result ? "Equal (true)" : "Not Equal (false)"));
+    }
+
+    // Inches equality method
+    public static void demonstrateInchesEquality() {
+
+        Inches i1 = new Inches(1.0);
+        Inches i2 = new Inches(1.0);
+
+        boolean result = i1.equals(i2);
+
+        System.out.println("Input: 1.0 inch and 1.0 inch");
+        System.out.println("Output: " + (result ? "Equal (true)" : "Not Equal (false)"));
+    }
+
+    public static void main(String[] args) {
+
+        demonstrateFeetEquality();
+        System.out.println();
+
+        demonstrateInchesEquality();
     }
 }

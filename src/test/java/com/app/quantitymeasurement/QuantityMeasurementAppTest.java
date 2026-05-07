@@ -3,72 +3,71 @@ package com.app.quantitymeasurement;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.app.quantitymeasurement.QuantityMeasurementApp.Feet;
-import com.app.quantitymeasurement.QuantityMeasurementApp.Inches;
-
 public class QuantityMeasurementAppTest {
-
     @Test
-    public void testFeetEquality_SameValue() {
-        Feet f1 = new Feet(1.0);
-        Feet f2 = new Feet(1.0);
+    public void testEquality_FeetToFeet_SameValue() {
 
-        assertTrue(f1.equals(f2));
+        Length length1 = new Length(1.0, Length.LengthUnit.FEET);
+
+        Length length2 = new Length(1.0, Length.LengthUnit.FEET);
+
+        assertTrue(length1.equals(length2));
     }
 
     @Test
-    public void testFeetEquality_DifferentValue() {
-        Feet f1 = new Feet(1.0);
-        Feet f2 = new Feet(2.0);
+    public void testEquality_InchToInch_SameValue() {
 
-        assertFalse(f1.equals(f2));
+        Length length1 = new Length(1.0, Length.LengthUnit.INCHES);
+
+        Length length2 = new Length(1.0, Length.LengthUnit.INCHES);
+
+        assertTrue(length1.equals(length2));
     }
 
     @Test
-    public void testFeetEquality_NullComparison() {
-        Feet f1 = new Feet(1.0);
+    public void testEquality_InchToFeet_EquivalentValue() {
 
-        assertFalse(f1.equals(null));
+        Length feet = new Length(1.0, Length.LengthUnit.FEET);
+
+        Length inches = new Length(12.0, Length.LengthUnit.INCHES);
+
+        assertTrue(feet.equals(inches));
     }
 
     @Test
-    public void testFeetEquality_SameReference() {
-        Feet f1 = new Feet(1.0);
+    public void testEquality_FeetToFeet_DifferentValue() {
 
-        assertTrue(f1.equals(f1));
+        Length length1 = new Length(1.0, Length.LengthUnit.FEET);
+
+        Length length2 = new Length(2.0, Length.LengthUnit.FEET);
+
+        assertFalse(length1.equals(length2));
     }
 
     @Test
-    public void testInchesEquality_SameValue() {
+    public void testEquality_InchToInch_DifferentValue() {
 
-        Inches i1 = new Inches(1.0);
-        Inches i2 = new Inches(1.0);
+        Length length1 = new Length(1.0, Length.LengthUnit.INCHES);
 
-        assertTrue(i1.equals(i2));
+        Length length2 = new Length(2.0, Length.LengthUnit.INCHES);
+
+        assertFalse(length1.equals(length2));
     }
 
     @Test
-    public void testInchesEquality_DifferentValue() {
+    public void testEquality_NullComparison() {
 
-        Inches i1 = new Inches(1.0);
-        Inches i2 = new Inches(2.0);
+        Length length = new Length(1.0, Length.LengthUnit.FEET);
 
-        assertFalse(i1.equals(i2));
+        assertFalse(length.equals(null));
     }
 
     @Test
-    public void testInchesEquality_NullComparison() {
+    public void testEquality_SameReference() {
 
-        Inches i1 = new Inches(1.0);
+        Length length = new Length(1.0, Length.LengthUnit.FEET);
 
-        assertFalse(i1.equals(null));
+        assertTrue(length.equals(length));
     }
 
-    @Test
-    public void testInchesEquality_SameReference() {
-
-        Inches i1 = new Inches(1.0);
-
-        assertTrue(i1.equals(i1));
-    }
 }

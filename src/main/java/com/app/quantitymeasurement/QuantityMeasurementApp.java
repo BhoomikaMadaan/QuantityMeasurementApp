@@ -2,80 +2,50 @@ package com.app.quantitymeasurement;
 
 public class QuantityMeasurementApp {
 
-    // Feet class
-    public static class Feet {
-        private final double value;
+    public static boolean demonstrateLengthEquality(
+            Length length1,
+            Length length2) {
 
-        public Feet(double value) {
-            this.value = value;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-
-            if (this == obj)
-                return true;
-
-            if (obj == null)
-                return false;
-
-            if (getClass() != obj.getClass())
-                return false;
-
-            Feet other = (Feet) obj;
-
-            return Double.compare(this.value, other.value) == 0;
-        }
+        return length1.equals(length2);
     }
 
-    // Inches class
-    public static class Inches {
-        private final double value;
-
-        public Inches(double value) {
-            this.value = value;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-
-            if (this == obj)
-                return true;
-
-            if (obj == null)
-                return false;
-
-            if (getClass() != obj.getClass())
-                return false;
-
-            Inches other = (Inches) obj;
-
-            return Double.compare(this.value, other.value) == 0;
-        }
-    }
-
-    // Feet equality method
     public static void demonstrateFeetEquality() {
 
-        Feet f1 = new Feet(1.0);
-        Feet f2 = new Feet(1.0);
+        Length length1 = new Length(1.0, Length.LengthUnit.FEET);
 
-        boolean result = f1.equals(f2);
+        Length length2 = new Length(1.0, Length.LengthUnit.FEET);
 
-        System.out.println("Input: 1.0 ft and 1.0 ft");
-        System.out.println("Output: " + (result ? "Equal (true)" : "Not Equal (false)"));
+        boolean result = demonstrateLengthEquality(length1, length2);
+
+        System.out.println("Input: Quantity(1.0, feet) and Quantity(1.0, feet)");
+        System.out.println("Output: " +
+                (result ? "Equal (true)" : "Not Equal (false)"));
     }
 
-    // Inches equality method
     public static void demonstrateInchesEquality() {
 
-        Inches i1 = new Inches(1.0);
-        Inches i2 = new Inches(1.0);
+        Length length1 = new Length(1.0, Length.LengthUnit.INCHES);
 
-        boolean result = i1.equals(i2);
+        Length length2 = new Length(1.0, Length.LengthUnit.INCHES);
 
-        System.out.println("Input: 1.0 inch and 1.0 inch");
-        System.out.println("Output: " + (result ? "Equal (true)" : "Not Equal (false)"));
+        boolean result = demonstrateLengthEquality(length1, length2);
+
+        System.out.println("Input: Quantity(1.0, inches) and Quantity(1.0, inches)");
+        System.out.println("Output: " +
+                (result ? "Equal (true)" : "Not Equal (false)"));
+    }
+
+    public static void demonstrateFeetInchesComparison() {
+
+        Length feet = new Length(1.0, Length.LengthUnit.FEET);
+
+        Length inches = new Length(12.0, Length.LengthUnit.INCHES);
+
+        boolean result = demonstrateLengthEquality(feet, inches);
+
+        System.out.println("Input: Quantity(1.0, feet) and Quantity(12.0, inches)");
+        System.out.println("Output: " +
+                (result ? "Equal (true)" : "Not Equal (false)"));
     }
 
     public static void main(String[] args) {
@@ -84,5 +54,8 @@ public class QuantityMeasurementApp {
         System.out.println();
 
         demonstrateInchesEquality();
+        System.out.println();
+
+        demonstrateFeetInchesComparison();
     }
 }

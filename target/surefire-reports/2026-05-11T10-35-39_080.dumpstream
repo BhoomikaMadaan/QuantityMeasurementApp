@@ -1,4 +1,4 @@
-# Created at 2026-05-07T09:46:02.701
+# Created at 2026-05-11T10:35:39.455
 Boot Manifest-JAR contains absolute paths in classpath 'D:\BridgeLabz\QuantityMeasurementApp\target\test-classes'
 Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
 'other' has different root

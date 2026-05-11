@@ -42,11 +42,12 @@ public class Length {
     }
 
     // Generic comparison method
+
     public boolean compare(Length otherLength) {
 
-        return Double.compare(
-                this.convertToBaseUnit(),
-                otherLength.convertToBaseUnit()) == 0;
+        return Math.abs(
+                this.convertToBaseUnit()
+                        - otherLength.convertToBaseUnit()) < 0.01;
     }
 
     @Override

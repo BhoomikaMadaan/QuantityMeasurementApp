@@ -428,4 +428,56 @@ public class QuantityMeasurementAppTest {
 
         assertTrue(converted.equals(expected));
     }
+
+    @Test
+    public void convertZeroFeetToInches() {
+        double result = Length.convert(0.0,
+                Length.LengthUnit.FEET,
+                Length.LengthUnit.INCHES);
+
+        assertEquals(0.0, result, 0.0001);
+    }
+
+    @Test
+    public void convertNegativeFeetToInches() {
+        double result = Length.convert(-1.0,
+                Length.LengthUnit.FEET,
+                Length.LengthUnit.INCHES);
+
+        assertEquals(-12.0, result, 0.0001);
+    }
+
+    @Test
+    public void convertInchesToFeet() {
+        double result = Length.convert(24.0,
+                Length.LengthUnit.INCHES,
+                Length.LengthUnit.FEET);
+
+        assertEquals(2.0, result, 0.0001);
+    }
+
+    @Test
+    public void convertInchesToYards() {
+        double result = Length.convert(72.0,
+                Length.LengthUnit.INCHES,
+                Length.LengthUnit.YARDS);
+
+        assertEquals(2.0, result, 0.0001);
+    }
+
+    @Test
+    public void roundTripConversionPreservesValue() {
+
+        double original = 5.0;
+
+        double inches = Length.convert(original,
+                Length.LengthUnit.FEET,
+                Length.LengthUnit.INCHES);
+
+        double feet = Length.convert(inches,
+                Length.LengthUnit.INCHES,
+                Length.LengthUnit.FEET);
+
+        assertEquals(original, feet, 0.0001);
+    }
 }

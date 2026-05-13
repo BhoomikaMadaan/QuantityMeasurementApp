@@ -157,6 +157,28 @@ public class QuantityMeasurementApp {
         return length.convertTo(toUnit);
     }
 
+    // Addition demonstration using objects
+    public static Length demonstrateLengthAddition(
+            Length length1,
+            Length length2) {
+
+        return length1.add(length2);
+    }
+
+    // Overloaded addition method using raw values
+    public static Length demonstrateLengthAddition(
+            double value1,
+            Length.LengthUnit unit1,
+            double value2,
+            Length.LengthUnit unit2) {
+
+        Length length1 = new Length(value1, unit1);
+
+        Length length2 = new Length(value2, unit2);
+
+        return length1.add(length2);
+    }
+
     public static void main(String[] args) {
 
         // FEET to INCHES
@@ -194,5 +216,59 @@ public class QuantityMeasurementApp {
 
         System.out.println("Convert 2.54 CM to INCHES:");
         System.out.println(result4);
+
+        // uc6 addition to add the demo calls
+        System.out.println();
+        System.out.println("UC6 - Length Addition");
+
+        // FEET + FEET
+        Length addResult1 = demonstrateLengthAddition(
+                1.0,
+                Length.LengthUnit.FEET,
+                2.0,
+                Length.LengthUnit.FEET);
+
+        System.out.println("1 FOOT + 2 FEET:");
+        System.out.println(addResult1);
+
+        // FEET + INCHES
+        Length addResult2 = demonstrateLengthAddition(
+                1.0,
+                Length.LengthUnit.FEET,
+                12.0,
+                Length.LengthUnit.INCHES);
+
+        System.out.println("1 FOOT + 12 INCHES:");
+        System.out.println(addResult2);
+
+        // INCHES + FEET
+        Length addResult3 = demonstrateLengthAddition(
+                12.0,
+                Length.LengthUnit.INCHES,
+                1.0,
+                Length.LengthUnit.FEET);
+
+        System.out.println("12 INCHES + 1 FOOT:");
+        System.out.println(addResult3);
+
+        // YARDS + FEET
+        Length addResult4 = demonstrateLengthAddition(
+                1.0,
+                Length.LengthUnit.YARDS,
+                3.0,
+                Length.LengthUnit.FEET);
+
+        System.out.println("1 YARD + 3 FEET:");
+        System.out.println(addResult4);
+
+        // CM + INCH
+        Length addResult5 = demonstrateLengthAddition(
+                2.54,
+                Length.LengthUnit.CENTIMETERS,
+                1.0,
+                Length.LengthUnit.INCHES);
+
+        System.out.println("2.54 CM + 1 INCH:");
+        System.out.println(addResult5);
     }
 }

@@ -1,72 +1,3 @@
-// package com.app.quantitymeasurement;
-
-// public class Length {
-
-// private final double value;
-// private final LengthUnit unit;
-
-// // Enum for units
-// public enum LengthUnit {
-
-// FEET(12.0),
-// INCHES(1.0),
-// // UC4 ADDITION:updated enum to add for yards and centimeters
-// YARDS(36.0),
-// CENTIMETERS(0.393701);
-
-// private final double conversionFactor;
-
-// LengthUnit(double conversionFactor) {
-// this.conversionFactor = conversionFactor;
-// }
-
-// public double getConversionFactor() {
-// return conversionFactor;
-// }
-// }
-
-// // Constructor
-// public Length(double value, LengthUnit unit) {
-
-// if (unit == null) {
-// throw new IllegalArgumentException("Unit cannot be null");
-// }
-
-// this.value = value;
-// this.unit = unit;
-// }
-
-// // Convert to base unit (inches)
-// private double convertToBaseUnit() {
-// return value * unit.getConversionFactor();
-// }
-
-// // Generic comparison method
-
-// public boolean compare(Length otherLength) {
-
-// return Math.abs(
-// this.convertToBaseUnit()
-// - otherLength.convertToBaseUnit()) < 0.01;
-// }
-
-// @Override
-// public boolean equals(Object obj) {
-
-// if (this == obj)
-// return true;
-
-// if (obj == null)
-// return false;
-
-// if (getClass() != obj.getClass())
-// return false;
-
-// Length other = (Length) obj;
-
-// return compare(other);
-// }
-// }
 
 // uc5 implementation
 
@@ -182,9 +113,44 @@ public class Length {
         return new Length(convertedValue, targetUnit);
     }
 
+    // UC6 ADDITION TO METHOD ADD
+    public Length add(Length otherLength) {
+
+        if (otherLength == null) {
+            throw new IllegalArgumentException("Length cannot be null");
+        }
+
+        double thisBaseValue = this.value * this.unit.getConversionFactor();
+
+        double otherBaseValue = otherLength.value * otherLength.unit.getConversionFactor();
+
+        double sumInBaseUnit = thisBaseValue + otherBaseValue;
+
+        double result = sumInBaseUnit / this.unit.getConversionFactor();
+
+        return new Length(result, this.unit);
+    }
+
+    public static Length add(Length length1, Length length2) {
+
+        if (length1 == null || length2 == null) {
+            throw new IllegalArgumentException("Length cannot be null");
+        }
+
+        return length1.add(length2);
+    }
+
     @Override
     public String toString() {
         return String.format("%.2f %s", value, unit);
+    }
+
+    public LengthUnit getUnit() {
+        return unit;
+    }
+
+    public double getValue() {
+        return value;
     }
 
     // Main method for standalone testing

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.113" tests="36" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="24"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="D:\BridgeLabz\QuantityMeasurementApp\target\test-classes;D:\BridgeLabz\QuantityMeasurementApp\target\classes;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.0\junit-jupiter-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\bhoom\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\bhoom\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.0\junit-jupiter-params-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Calcutta"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="24"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
+    <property name="sun.java.command" value="C:\Users\bhoom\AppData\Local\Temp\surefire5362978398690033470\surefirebooter-20260513105036797_3.jar C:\Users\bhoom\AppData\Local\Temp\surefire5362978398690033470 2026-05-13T10-50-36_582-jvmRun1 surefire-20260513105036797_1tmp surefire_0-20260513105036797_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="D:\BridgeLabz\QuantityMeasurementApp\target\test-classes;D:\BridgeLabz\QuantityMeasurementApp\target\classes;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.0\junit-jupiter-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\bhoom\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\bhoom\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.0\junit-jupiter-params-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\bhoom"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-24"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="D:\BridgeLabz\QuantityMeasurementApp"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\bhoom\AppData\Local\Temp\surefire5362978398690033470\surefirebooter-20260513105036797_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="24.0.1+9-30"/>
+    <property name="user.name" value="bhoom"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\bhoom\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\bhoom\AppData\Local\Temp\"/>
+    <property name="java.version" value="24.0.1"/>
+    <property name="user.dir" value="D:\BridgeLabz\QuantityMeasurementApp"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-24\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;c:\Users\bhoom\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\bhoom\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Users\bhoom\AppData\Local\Programs\Microsoft VS Code;C:\Program Files\Common Files\Oracle\Java\javapath;D:\SIT331\postgre\bin;C:\Python312\Scripts\;C:\Python312\;D:\SIT103\dbhomeXE\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;&quot;C:\msys64C:\msys64\usr\bin;\mingw64\bin&quot;;C:\MinGW\mingw32\bin;C:\MinGW\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Users\Bhoomika\AppData\Roaming\npm;D:\SIT331\postgre\bin;C:\Program Files\Java\jdk-17;C:\Program Files\Java\jdk-17\bin;D:\PuTTY\;D:\POSTGRES\bin;C:\Program Files\Docker\Docker\resources\bin;D:\Git\cmd;D:\SIT331\postgre\bin;C:\Python312\Scripts\;C:\Python312\;D:\SIT103\dbhomeXE\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\msys64C:\msys64\usr\bin;\mingw64\bin;C:\MinGW\mingw32\bin;C:\MinGW\bin;C:\ProgramData\chocolatey\bin;D:\SIT223\Git\cmd;C:\Program Files\nodejs\;C:\Users\Bhoomika\AppData\Roaming\npm;D:\SIT331\postgre\bin;C:\Program Files\Java\jdk-17;C:\Program Files\Java\jdk-17\bin;C:\msys64\home\bhoom\.splashkit;C:\msys64\home\bhoom\.splashkit\lib\win64;C:\msys64\home\bhoom\.splashkit\lib;C:\Windows\System32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Users\bhoom\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\bhoom\.dotnet\tools;C:\Users\bhoom\AppData\Local\Programs\Microsoft VS Code\Code.exe;C:\Users\bhoom\AppData\Local\Microsoft\WindowsApps;C:\Users\bhoom\AppData\Roaming\npm;D:\SIT331\Azu;C:\Program Files\MongoDB\Server\8.0\bin;D:\POSTGRES\bin;c:\Users\bhoom\.vscode\extensions\vscjava.vscode-java-debug-0.59.0\bundled\scripts\noConfigScripts;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="24.0.1+9-30"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="68.0"/>
+  </properties>
+  <testcase name="testConversion_LargeValue" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.037"/>
+  <testcase name="testConversion_FeetToYards" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="additionPreservesFirstOperandUnit" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.003"/>
+  <testcase name="testConversion_PrecisionTolerance" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="addInchesToFeet" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_InvalidUnit_Throws" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
+  <testcase name="addZeroValues" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="convertInchesToFeet" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_ZeroValue" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_UsingOverloadedMethod" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="addLargeValues" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_NegativeValue" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_RoundTrip_PreservesValue" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="addCentimetersToInches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
+  <testcase name="addSmallDecimalValues" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="addSameUnitReturnsCorrectUnit" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="addYardsToFeet" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_NaN_Throws" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="addNegativeValues" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.0"/>
+  <testcase name="testConversion_FeetToInches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="convertZeroFeetToInches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_Infinite_Throws" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="convertInchesToYards" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_InchesToYards" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="additionIsCommutativeForEquivalentUnits" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_SmallValue" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_SameUnit" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_InchesToFeet" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.0"/>
+  <testcase name="addFeetToFeet" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.0"/>
+  <testcase name="roundTripConversionPreservesValue" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="addSameObjectReference" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="addFeetToInches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_UsingConvertToMethod" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="convertNegativeFeetToInches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_CentimetersToInches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testConversion_YardsToInches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+</testsuite>

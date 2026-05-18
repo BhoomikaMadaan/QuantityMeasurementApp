@@ -140,6 +140,43 @@ public class Length {
         return length1.add(length2);
     }
 
+    /**
+     * Adding length to this length with target unit specification.
+     *
+     * @param length     the Length to add
+     * @param targetUnit the unit to return the sum in
+     * @return a new Length representing the sum in the specified target unit
+     */
+    public Length add(Length length, LengthUnit targetUnit) {
+        return addAndConvert(length, targetUnit);
+    }
+
+    /**
+     * UC7 Implementation
+     * Private utility method to perform addition conversion on base unit value.
+     *
+     * @param length     the Length to add
+     * @param targetUnit the unit to return the sum in
+     * @return a new Length representing the sum in the specified target unit
+     */
+    private Length addAndConvert(Length length, LengthUnit targetUnit) {
+
+        if (length == null || targetUnit == null) {
+            throw new IllegalArgumentException(
+                    "Length or target unit cannot be null");
+        }
+
+        double thisLengthInInches = this.convertToBaseUnit();
+
+        double otherLengthInInches = length.convertToBaseUnit();
+
+        double totalLengthInInches = thisLengthInInches + otherLengthInInches;
+
+        double convertedValue = totalLengthInInches / targetUnit.conversionFactor;
+
+        return new Length(convertedValue, targetUnit);
+    }
+
     @Override
     public String toString() {
         return String.format("%.2f %s", value, unit);

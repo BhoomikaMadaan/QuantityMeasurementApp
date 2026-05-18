@@ -674,4 +674,217 @@ public class QuantityMeasurementAppTest {
 
                 assertTrue(result.equals(expected));
         }
+
+        // UC7 implementtaion of the test cASES
+        @Test
+        public void testAddition_ExplicitTargetUnit_Yards() {
+
+                Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(1.0, Length.LengthUnit.FEET),
+                                new Length(12.0, Length.LengthUnit.INCHES),
+                                Length.LengthUnit.YARDS);
+
+                Length expected = new Length(0.67, Length.LengthUnit.YARDS);
+
+                assertEquals(
+                                expected.getValue(),
+                                result.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_Centimeters() {
+
+                Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(1.0, Length.LengthUnit.INCHES),
+                                new Length(1.0, Length.LengthUnit.INCHES),
+                                Length.LengthUnit.CENTIMETERS);
+
+                Length expected = new Length(5.08, Length.LengthUnit.CENTIMETERS);
+
+                assertEquals(
+                                expected.getValue(),
+                                result.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_SameAsFirstOperand() {
+
+                Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(2.0, Length.LengthUnit.YARDS),
+                                new Length(3.0, Length.LengthUnit.FEET),
+                                Length.LengthUnit.YARDS);
+
+                Length expected = new Length(3.0, Length.LengthUnit.YARDS);
+
+                assertTrue(result.equals(expected));
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_SameAsSecondOperand() {
+
+                Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(2.0, Length.LengthUnit.YARDS),
+                                new Length(3.0, Length.LengthUnit.FEET),
+                                Length.LengthUnit.FEET);
+
+                Length expected = new Length(9.0, Length.LengthUnit.FEET);
+
+                assertTrue(result.equals(expected));
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_Commutativity() {
+
+                Length result1 = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(1.0, Length.LengthUnit.FEET),
+                                new Length(12.0, Length.LengthUnit.INCHES),
+                                Length.LengthUnit.YARDS);
+
+                Length result2 = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(12.0, Length.LengthUnit.INCHES),
+                                new Length(1.0, Length.LengthUnit.FEET),
+                                Length.LengthUnit.YARDS);
+
+                assertEquals(
+                                result1.getValue(),
+                                result2.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_WithZero() {
+
+                Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(5.0, Length.LengthUnit.FEET),
+                                new Length(0.0, Length.LengthUnit.INCHES),
+                                Length.LengthUnit.YARDS);
+
+                Length expected = new Length(1.67, Length.LengthUnit.YARDS);
+
+                assertEquals(
+                                expected.getValue(),
+                                result.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_NegativeValues() {
+
+                Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(5.0, Length.LengthUnit.FEET),
+                                new Length(-2.0, Length.LengthUnit.FEET),
+                                Length.LengthUnit.INCHES);
+
+                Length expected = new Length(36.0, Length.LengthUnit.INCHES);
+
+                assertTrue(result.equals(expected));
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_NullTargetUnit() {
+
+                assertThrows(
+                                IllegalArgumentException.class,
+                                () -> QuantityMeasurementApp.demonstrateLengthAddition(
+                                                new Length(1.0, Length.LengthUnit.FEET),
+                                                new Length(12.0, Length.LengthUnit.INCHES),
+                                                null));
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_LargeToSmallScale() {
+
+                Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(1000.0, Length.LengthUnit.FEET),
+                                new Length(500.0, Length.LengthUnit.FEET),
+                                Length.LengthUnit.INCHES);
+
+                Length expected = new Length(18000.0, Length.LengthUnit.INCHES);
+
+                assertTrue(result.equals(expected));
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_SmallToLargeScale() {
+
+                Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(12.0, Length.LengthUnit.INCHES),
+                                new Length(12.0, Length.LengthUnit.INCHES),
+                                Length.LengthUnit.YARDS);
+
+                Length expected = new Length(0.67, Length.LengthUnit.YARDS);
+
+                assertEquals(
+                                expected.getValue(),
+                                result.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_PrecisionTolerance() {
+
+                Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(2.54, Length.LengthUnit.CENTIMETERS),
+                                new Length(1.0, Length.LengthUnit.INCHES),
+                                Length.LengthUnit.CENTIMETERS);
+
+                assertEquals(
+                                5.08,
+                                result.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_Feet() {
+
+                Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(1.0, Length.LengthUnit.FEET),
+                                new Length(12.0, Length.LengthUnit.INCHES),
+                                Length.LengthUnit.FEET);
+
+                Length expected = new Length(2.0, Length.LengthUnit.FEET);
+
+                assertTrue(result.equals(expected));
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_Inches() {
+
+                Length result = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(1.0, Length.LengthUnit.FEET),
+                                new Length(12.0, Length.LengthUnit.INCHES),
+                                Length.LengthUnit.INCHES);
+
+                Length expected = new Length(24.0, Length.LengthUnit.INCHES);
+
+                assertTrue(result.equals(expected));
+        }
+
+        @Test
+        public void testAddition_ExplicitTargetUnit_AllUnitCombinations() {
+
+                Length result1 = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(1.0, Length.LengthUnit.FEET),
+                                new Length(12.0, Length.LengthUnit.INCHES),
+                                Length.LengthUnit.FEET);
+
+                Length result2 = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(1.0, Length.LengthUnit.YARDS),
+                                new Length(3.0, Length.LengthUnit.FEET),
+                                Length.LengthUnit.YARDS);
+
+                Length result3 = QuantityMeasurementApp.demonstrateLengthAddition(
+                                new Length(2.54, Length.LengthUnit.CENTIMETERS),
+                                new Length(1.0, Length.LengthUnit.INCHES),
+                                Length.LengthUnit.CENTIMETERS);
+
+                assertEquals(2.0, result1.getValue(), 0.01);
+
+                assertEquals(2.0, result2.getValue(), 0.01);
+
+                assertEquals(5.08, result3.getValue(), 0.01);
+        }
+
 }

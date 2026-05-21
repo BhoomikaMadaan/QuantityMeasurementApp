@@ -49,6 +49,32 @@ public class QuantityMeasurementApp {
                 return length1.add(length2, targetUnit);
         }
 
+        // =========================
+        // UC9 - weight Conversion
+        // =========================
+
+        public static QuantityWeight demonstrateWeightConversion(
+                        QuantityWeight weight,
+                        WeightUnit targetUnit) {
+
+                return weight.convertTo(targetUnit);
+        }
+
+        public static QuantityWeight demonstrateWeightAddition(
+                        QuantityWeight weight1,
+                        QuantityWeight weight2) {
+
+                return weight1.add(weight2);
+        }
+
+        public static QuantityWeight demonstrateWeightAddition(
+                        QuantityWeight weight1,
+                        QuantityWeight weight2,
+                        WeightUnit targetUnit) {
+
+                return weight1.add(weight2, targetUnit);
+        }
+
         public static void main(String[] args) {
 
                 // =========================
@@ -153,5 +179,67 @@ public class QuantityMeasurementApp {
 
                 System.out.println("1 FOOT + 12 INCHES in INCHES:");
                 System.out.println(result7);
+
+                // =========================
+                // UC9 - Weight Measurement
+                // =========================
+
+                System.out.println("\nUC9 - Weight Measurement");
+
+                // Equality
+
+                QuantityWeight weight1 = new QuantityWeight(
+                                1.0,
+                                WeightUnit.KILOGRAM);
+
+                QuantityWeight weight2 = new QuantityWeight(
+                                1000.0,
+                                WeightUnit.GRAM);
+
+                System.out.println("1 KILOGRAM equals 1000 GRAM:");
+                System.out.println(weight1.equals(weight2));
+
+                // Conversion
+
+                QuantityWeight convertedWeight = demonstrateWeightConversion(
+                                new QuantityWeight(
+                                                1.0,
+                                                WeightUnit.KILOGRAM),
+                                WeightUnit.POUND);
+
+                System.out.println("\nConvert 1 KILOGRAM to POUND:");
+                System.out.println(convertedWeight);
+
+                // Addition (implicit target unit)
+
+                QuantityWeight additionResult1 = demonstrateWeightAddition(
+                                new QuantityWeight(
+                                                1.0,
+                                                WeightUnit.KILOGRAM),
+
+                                new QuantityWeight(
+                                                500.0,
+                                                WeightUnit.GRAM));
+
+                System.out.println("\n1 KILOGRAM + 500 GRAM:");
+                System.out.println(additionResult1);
+
+                // Addition (explicit target unit)
+
+                QuantityWeight additionResult2 = demonstrateWeightAddition(
+                                new QuantityWeight(
+                                                1.0,
+                                                WeightUnit.KILOGRAM),
+
+                                new QuantityWeight(
+                                                500.0,
+                                                WeightUnit.GRAM),
+
+                                WeightUnit.GRAM);
+
+                System.out.println(
+                                "\n1 KILOGRAM + 500 GRAM in GRAM:");
+
+                System.out.println(additionResult2);
         }
 }

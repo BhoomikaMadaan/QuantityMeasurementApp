@@ -2,244 +2,146 @@ package com.app.quantitymeasurement;
 
 public class QuantityMeasurementApp {
 
-        /**
-         * UC5 - Demonstrate Length Conversion
-         */
-        public static Length demonstrateLengthConversion(
-                        Length length,
-                        LengthUnit targetUnit) {
-
-                return length.convertTo(targetUnit);
-        }
-
-        /**
-         * UC6 - Addition using Length objects
-         */
-        public static Length demonstrateLengthAddition(
-                        Length length1,
-                        Length length2) {
-
-                return length1.add(length2);
-        }
-
-        /**
-         * UC6 - Overloaded Addition Method
-         */
-        public static Length demonstrateLengthAddition(
-                        double value1,
-                        LengthUnit unit1,
-                        double value2,
-                        LengthUnit unit2) {
-
-                Length length1 = new Length(value1, unit1);
-
-                Length length2 = new Length(value2, unit2);
-
-                return length1.add(length2);
-        }
-
-        /**
-         * UC7 - Addition with explicit target unit
-         */
-        public static Length demonstrateLengthAddition(
-                        Length length1,
-                        Length length2,
-                        LengthUnit targetUnit) {
-
-                return length1.add(length2, targetUnit);
-        }
-
-        // =========================
-        // UC9 - weight Conversion
-        // =========================
-
-        public static QuantityWeight demonstrateWeightConversion(
-                        QuantityWeight weight,
-                        WeightUnit targetUnit) {
-
-                return weight.convertTo(targetUnit);
-        }
-
-        public static QuantityWeight demonstrateWeightAddition(
-                        QuantityWeight weight1,
-                        QuantityWeight weight2) {
-
-                return weight1.add(weight2);
-        }
-
-        public static QuantityWeight demonstrateWeightAddition(
-                        QuantityWeight weight1,
-                        QuantityWeight weight2,
-                        WeightUnit targetUnit) {
-
-                return weight1.add(weight2, targetUnit);
-        }
-
         public static void main(String[] args) {
 
-                // =========================
-                // UC5 - Unit Conversion
-                // =========================
+                System.out.println(
+                                "===== UC10 Generic Quantity Framework =====\n");
 
-                Length length1 = new Length(1.0, LengthUnit.FEET);
+                demonstrateLengthOperations();
 
-                Length convertedLength1 = demonstrateLengthConversion(
-                                length1,
+                demonstrateWeightOperations();
+
+                demonstrateCrossCategorySafety();
+        }
+
+        /**
+         * Length Demonstration
+         */
+        private static void demonstrateLengthOperations() {
+
+                System.out.println(
+                                "----- Length Operations -----");
+
+                Quantity<LengthUnit> length1 = new Quantity<>(
+                                1.0,
+                                LengthUnit.FEET);
+
+                Quantity<LengthUnit> length2 = new Quantity<>(
+                                12.0,
                                 LengthUnit.INCHES);
 
-                System.out.println("Convert 1 FOOT to INCHES:");
-                System.out.println(convertedLength1);
+                System.out.println(
+                                "Length 1: " + length1);
 
-                Length length2 = new Length(3.0, LengthUnit.YARDS);
+                System.out.println(
+                                "Length 2: " + length2);
 
-                Length convertedLength2 = demonstrateLengthConversion(
+                System.out.println(
+                                "\nEquality Check:");
+
+                System.out.println(
+                                length1.equals(length2));
+
+                System.out.println(
+                                "\nAddition:");
+
+                Quantity<LengthUnit> result = length1.add(length2);
+
+                System.out.println(result);
+
+                System.out.println(
+                                "\nAddition in INCHES:");
+
+                Quantity<LengthUnit> inchResult = length1.add(
                                 length2,
-                                LengthUnit.FEET);
-
-                System.out.println("Convert 3 YARDS to FEET:");
-                System.out.println(convertedLength2);
-
-                Length length3 = new Length(36.0, LengthUnit.INCHES);
-
-                Length convertedLength3 = demonstrateLengthConversion(
-                                length3,
-                                LengthUnit.YARDS);
-
-                System.out.println("Convert 36 INCHES to YARDS:");
-                System.out.println(convertedLength3);
-
-                Length length4 = new Length(2.54, LengthUnit.CENTIMETERS);
-
-                Length convertedLength4 = demonstrateLengthConversion(
-                                length4,
                                 LengthUnit.INCHES);
 
-                System.out.println("Convert 2.54 CM to INCHES:");
-                System.out.println(convertedLength4);
+                System.out.println(inchResult);
 
-                // =========================
-                // UC6 - Length Addition
-                // =========================
+                System.out.println(
+                                "\nConvert FEET to YARDS:");
 
-                System.out.println("\nUC6 - Length Addition");
+                System.out.println(
+                                length1.convertTo(
+                                                LengthUnit.YARDS));
 
-                Length result1 = demonstrateLengthAddition(
-                                new Length(1.0, LengthUnit.FEET),
-                                new Length(2.0, LengthUnit.FEET));
+                System.out.println();
+        }
 
-                System.out.println("1 FOOT + 2 FEET:");
-                System.out.println(result1);
+        /**
+         * Weight Demonstration
+         */
+        private static void demonstrateWeightOperations() {
 
-                Length result2 = demonstrateLengthAddition(
-                                new Length(1.0, LengthUnit.FEET),
-                                new Length(12.0, LengthUnit.INCHES));
+                System.out.println(
+                                "----- Weight Operations -----");
 
-                System.out.println("1 FOOT + 12 INCHES:");
-                System.out.println(result2);
-
-                Length result3 = demonstrateLengthAddition(
-                                new Length(12.0, LengthUnit.INCHES),
-                                new Length(1.0, LengthUnit.FEET));
-
-                System.out.println("12 INCHES + 1 FOOT:");
-                System.out.println(result3);
-
-                Length result4 = demonstrateLengthAddition(
-                                new Length(1.0, LengthUnit.YARDS),
-                                new Length(3.0, LengthUnit.FEET));
-
-                System.out.println("1 YARD + 3 FEET:");
-                System.out.println(result4);
-
-                Length result5 = demonstrateLengthAddition(
-                                new Length(2.54, LengthUnit.CENTIMETERS),
-                                new Length(1.0, LengthUnit.INCHES));
-
-                System.out.println("2.54 CM + 1 INCH:");
-                System.out.println(result5);
-
-                // =========================
-                // UC7 - Addition with Target Unit
-                // =========================
-
-                System.out.println("\nUC7 - Length Addition with Target Unit");
-
-                Length result6 = demonstrateLengthAddition(
-                                new Length(1.0, LengthUnit.FEET),
-                                new Length(12.0, LengthUnit.INCHES),
-                                LengthUnit.FEET);
-
-                System.out.println("1 FOOT + 12 INCHES in FEET:");
-                System.out.println(result6);
-
-                Length result7 = demonstrateLengthAddition(
-                                new Length(1.0, LengthUnit.FEET),
-                                new Length(12.0, LengthUnit.INCHES),
-                                LengthUnit.INCHES);
-
-                System.out.println("1 FOOT + 12 INCHES in INCHES:");
-                System.out.println(result7);
-
-                // =========================
-                // UC9 - Weight Measurement
-                // =========================
-
-                System.out.println("\nUC9 - Weight Measurement");
-
-                // Equality
-
-                QuantityWeight weight1 = new QuantityWeight(
+                Quantity<WeightUnit> weight1 = new Quantity<>(
                                 1.0,
                                 WeightUnit.KILOGRAM);
 
-                QuantityWeight weight2 = new QuantityWeight(
+                Quantity<WeightUnit> weight2 = new Quantity<>(
                                 1000.0,
                                 WeightUnit.GRAM);
 
-                System.out.println("1 KILOGRAM equals 1000 GRAM:");
-                System.out.println(weight1.equals(weight2));
-
-                // Conversion
-
-                QuantityWeight convertedWeight = demonstrateWeightConversion(
-                                new QuantityWeight(
-                                                1.0,
-                                                WeightUnit.KILOGRAM),
-                                WeightUnit.POUND);
-
-                System.out.println("\nConvert 1 KILOGRAM to POUND:");
-                System.out.println(convertedWeight);
-
-                // Addition (implicit target unit)
-
-                QuantityWeight additionResult1 = demonstrateWeightAddition(
-                                new QuantityWeight(
-                                                1.0,
-                                                WeightUnit.KILOGRAM),
-
-                                new QuantityWeight(
-                                                500.0,
-                                                WeightUnit.GRAM));
-
-                System.out.println("\n1 KILOGRAM + 500 GRAM:");
-                System.out.println(additionResult1);
-
-                // Addition (explicit target unit)
-
-                QuantityWeight additionResult2 = demonstrateWeightAddition(
-                                new QuantityWeight(
-                                                1.0,
-                                                WeightUnit.KILOGRAM),
-
-                                new QuantityWeight(
-                                                500.0,
-                                                WeightUnit.GRAM),
-
-                                WeightUnit.GRAM);
+                System.out.println(
+                                "Weight 1: " + weight1);
 
                 System.out.println(
-                                "\n1 KILOGRAM + 500 GRAM in GRAM:");
+                                "Weight 2: " + weight2);
 
-                System.out.println(additionResult2);
+                System.out.println(
+                                "\nEquality Check:");
+
+                System.out.println(
+                                weight1.equals(weight2));
+
+                System.out.println(
+                                "\nAddition:");
+
+                Quantity<WeightUnit> result = weight1.add(weight2);
+
+                System.out.println(result);
+
+                System.out.println(
+                                "\nAddition in GRAM:");
+
+                Quantity<WeightUnit> gramResult = weight1.add(
+                                weight2,
+                                WeightUnit.GRAM);
+
+                System.out.println(gramResult);
+
+                System.out.println(
+                                "\nConvert KG to POUND:");
+
+                System.out.println(
+                                weight1.convertTo(
+                                                WeightUnit.POUND));
+
+                System.out.println();
+        }
+
+        /**
+         * Cross-category safety
+         */
+        private static void demonstrateCrossCategorySafety() {
+
+                System.out.println(
+                                "----- Cross Category Safety -----");
+
+                Quantity<LengthUnit> length = new Quantity<>(
+                                1.0,
+                                LengthUnit.FEET);
+
+                Quantity<WeightUnit> weight = new Quantity<>(
+                                1.0,
+                                WeightUnit.KILOGRAM);
+
+                System.out.println(
+                                "Length equals Weight?");
+
+                System.out.println(
+                                length.equals(weight));
         }
 }

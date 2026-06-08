@@ -295,4 +295,135 @@ public class QuantityMeasurementAppTest {
 
                                 0.01);
         }
+
+        // =========================
+        // UC11 Volume Tests
+        // =========================
+
+        @Test
+        public void testVolumeEquality() {
+
+                Quantity<VolumeUnit> volume1 = new Quantity<>(1.0,
+                                VolumeUnit.LITRE);
+
+                Quantity<VolumeUnit> volume2 = new Quantity<>(1000.0,
+                                VolumeUnit.MILLILITRE);
+
+                assertTrue(volume1.equals(volume2));
+        }
+
+        @Test
+        public void testVolumeConversion_LitreToMillilitre() {
+
+                Quantity<VolumeUnit> volume = new Quantity<>(1.0,
+                                VolumeUnit.LITRE);
+
+                Quantity<VolumeUnit> converted = volume.convertTo(
+                                VolumeUnit.MILLILITRE);
+
+                assertEquals(
+                                1000.0,
+                                converted.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testVolumeConversion_GallonToLitre() {
+
+                Quantity<VolumeUnit> gallon = new Quantity<>(1.0,
+                                VolumeUnit.GALLON);
+
+                Quantity<VolumeUnit> converted = gallon.convertTo(
+                                VolumeUnit.LITRE);
+
+                assertEquals(
+                                3.78541,
+                                converted.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testVolumeAddition() {
+
+                Quantity<VolumeUnit> volume1 = new Quantity<>(1.0,
+                                VolumeUnit.LITRE);
+
+                Quantity<VolumeUnit> volume2 = new Quantity<>(1000.0,
+                                VolumeUnit.MILLILITRE);
+
+                Quantity<VolumeUnit> result = volume1.add(volume2);
+
+                assertEquals(
+                                2.0,
+                                result.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testVolumeAddition_ExplicitTargetUnit() {
+
+                Quantity<VolumeUnit> volume1 = new Quantity<>(1.0,
+                                VolumeUnit.LITRE);
+
+                Quantity<VolumeUnit> volume2 = new Quantity<>(1000.0,
+                                VolumeUnit.MILLILITRE);
+
+                Quantity<VolumeUnit> result = volume1.add(
+                                volume2,
+                                VolumeUnit.MILLILITRE);
+
+                assertEquals(
+                                2000.0,
+                                result.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testVolumeVsLength_Incompatible() {
+
+                Quantity<VolumeUnit> volume = new Quantity<>(1.0,
+                                VolumeUnit.LITRE);
+
+                Quantity<LengthUnit> length = new Quantity<>(1.0,
+                                LengthUnit.FEET);
+
+                assertFalse(volume.equals(length));
+        }
+
+        @Test
+        public void testVolumeVsWeight_Incompatible() {
+
+                Quantity<VolumeUnit> volume = new Quantity<>(1.0,
+                                VolumeUnit.LITRE);
+
+                Quantity<WeightUnit> weight = new Quantity<>(1.0,
+                                WeightUnit.KILOGRAM);
+
+                assertFalse(volume.equals(weight));
+        }
+
+        @Test
+        public void testVolumeAdditionCommutativity() {
+
+                Quantity<VolumeUnit> volume1 = new Quantity<>(1.0,
+                                VolumeUnit.LITRE);
+
+                Quantity<VolumeUnit> volume2 = new Quantity<>(1000.0,
+                                VolumeUnit.MILLILITRE);
+
+                Quantity<VolumeUnit> result1 = volume1.add(volume2);
+
+                Quantity<VolumeUnit> result2 = volume2.add(volume1);
+
+                assertEquals(
+                                result1.convertTo(
+                                                VolumeUnit.LITRE)
+                                                .getValue(),
+
+                                result2.convertTo(
+                                                VolumeUnit.LITRE)
+                                                .getValue(),
+
+                                0.01);
+        }
 }

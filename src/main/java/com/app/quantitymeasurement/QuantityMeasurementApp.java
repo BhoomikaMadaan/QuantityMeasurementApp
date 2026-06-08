@@ -10,6 +10,7 @@ public class QuantityMeasurementApp {
                 demonstrateLengthOperations();
 
                 demonstrateWeightOperations();
+                demonstrateVolumeOperations();
 
                 demonstrateCrossCategorySafety();
         }
@@ -118,6 +119,67 @@ public class QuantityMeasurementApp {
                 System.out.println(
                                 weight1.convertTo(
                                                 WeightUnit.POUND));
+
+                System.out.println();
+        }
+
+        /**
+         * Volume Demonstration
+         */
+        private static void demonstrateVolumeOperations() {
+
+                System.out.println(
+                                "----- Volume Operations -----");
+
+                Quantity<VolumeUnit> volume1 = new Quantity<>(
+                                1.0,
+                                VolumeUnit.LITRE);
+
+                Quantity<VolumeUnit> volume2 = new Quantity<>(
+                                1000.0,
+                                VolumeUnit.MILLILITRE);
+
+                Quantity<VolumeUnit> volume3 = new Quantity<>(
+                                1.0,
+                                VolumeUnit.GALLON);
+
+                System.out.println(
+                                "Volume 1: " + volume1);
+
+                System.out.println(
+                                "Volume 2: " + volume2);
+
+                System.out.println(
+                                "Volume 3: " + volume3);
+
+                System.out.println(
+                                "\nEquality Check:");
+
+                System.out.println(
+                                volume1.equals(volume2));
+
+                System.out.println(
+                                "\nAddition:");
+
+                Quantity<VolumeUnit> result = volume1.add(volume2);
+
+                System.out.println(result);
+
+                System.out.println(
+                                "\nAddition in MILLILITRE:");
+
+                Quantity<VolumeUnit> mlResult = volume1.add(
+                                volume2,
+                                VolumeUnit.MILLILITRE);
+
+                System.out.println(mlResult);
+
+                System.out.println(
+                                "\nConvert GALLON to LITRE:");
+
+                System.out.println(
+                                volume3.convertTo(
+                                                VolumeUnit.LITRE));
 
                 System.out.println();
         }

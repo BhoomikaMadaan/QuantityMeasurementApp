@@ -3,5 +3,6 @@ com\app\quantitymeasurement\WeightUnit.class
 com\app\quantitymeasurement\QuantityWeight.class
 com\app\quantitymeasurement\Length.class
 com\app\quantitymeasurement\Quantity.class
+com\app\quantitymeasurement\VolumeUnit.class
 com\app\quantitymeasurement\IMeasurable.class
 com\app\quantitymeasurement\LengthUnit.class

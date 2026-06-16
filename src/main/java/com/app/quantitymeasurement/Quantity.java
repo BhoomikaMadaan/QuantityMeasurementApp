@@ -154,6 +154,82 @@ public class Quantity<U extends IMeasurable> {
                 targetUnit);
     }
 
+    /**
+     * Subtraction
+     * Result in first operand's unit
+     */
+    public Quantity<U> subtract(
+            Quantity<U> other) {
+
+        if (other == null) {
+
+            throw new IllegalArgumentException(
+                    "Quantity cannot be null");
+        }
+
+        double resultBaseValue = this.convertToBaseUnit()
+                - other.convertToBaseUnit();
+
+        double result = this.unit.convertFromBaseUnit(
+                resultBaseValue);
+
+        return new Quantity<>(
+                result,
+                this.unit);
+    }
+
+    /**
+     * UC 12 -Subtraction with explicit target unit
+     */
+    public Quantity<U> subtract(
+            Quantity<U> other,
+            U targetUnit) {
+
+        if (other == null
+                || targetUnit == null) {
+
+            throw new IllegalArgumentException(
+                    "Quantity or target unit cannot be null");
+        }
+
+        double resultBaseValue = this.convertToBaseUnit()
+                - other.convertToBaseUnit();
+
+        double convertedValue = targetUnit.convertFromBaseUnit(
+                resultBaseValue);
+
+        return new Quantity<>(
+                convertedValue,
+                targetUnit);
+    }
+
+    /**
+     * Division
+     * Returns dimensionless ratio
+     */
+    public double divide(
+            Quantity<U> other) {
+
+        if (other == null) {
+
+            throw new IllegalArgumentException(
+                    "Quantity cannot be null");
+        }
+
+        double divisor = other.convertToBaseUnit();
+
+        if (Double.compare(
+                divisor,
+                0.0) == 0) {
+
+            throw new ArithmeticException(
+                    "Division by zero");
+        }
+
+        return this.convertToBaseUnit()
+                / divisor;
+    }
+
     @Override
     public String toString() {
 

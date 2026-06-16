@@ -5,12 +5,17 @@ public class QuantityMeasurementApp {
         public static void main(String[] args) {
 
                 System.out.println(
-                                "===== UC10 Generic Quantity Framework =====\n");
+                                "===== UC12  =====\n");
 
                 demonstrateLengthOperations();
 
                 demonstrateWeightOperations();
+
                 demonstrateVolumeOperations();
+
+                demonstrateSubtractionOperations();
+
+                demonstrateDivisionOperations();
 
                 demonstrateCrossCategorySafety();
         }
@@ -180,6 +185,70 @@ public class QuantityMeasurementApp {
                 System.out.println(
                                 volume3.convertTo(
                                                 VolumeUnit.LITRE));
+
+                System.out.println();
+        }
+
+        /**
+         * UC-12 Subtraction Demonstration
+         */
+        private static void demonstrateSubtractionOperations() {
+
+                System.out.println(
+                                "----- Subtraction Operations -----");
+
+                Quantity<LengthUnit> length1 = new Quantity<>(10.0,
+                                LengthUnit.FEET);
+
+                Quantity<LengthUnit> length2 = new Quantity<>(6.0,
+                                LengthUnit.INCHES);
+
+                Quantity<LengthUnit> result = length1.subtract(length2);
+
+                System.out.println(
+                                "10 FEET - 6 INCHES = "
+                                                + result);
+
+                Quantity<LengthUnit> inchResult = length1.subtract(
+                                length2,
+                                LengthUnit.INCHES);
+
+                System.out.println(
+                                "10 FEET - 6 INCHES (INCHES) = "
+                                                + inchResult);
+
+                System.out.println();
+        }
+
+        /**
+         * Division Demonstration
+         */
+        private static void demonstrateDivisionOperations() {
+
+                System.out.println(
+                                "----- Division Operations -----");
+
+                Quantity<LengthUnit> length1 = new Quantity<>(24.0,
+                                LengthUnit.INCHES);
+
+                Quantity<LengthUnit> length2 = new Quantity<>(2.0,
+                                LengthUnit.FEET);
+
+                double ratio = length1.divide(length2);
+
+                System.out.println(
+                                "24 INCHES / 2 FEET = "
+                                                + ratio);
+
+                Quantity<WeightUnit> weight1 = new Quantity<>(10.0,
+                                WeightUnit.KILOGRAM);
+
+                Quantity<WeightUnit> weight2 = new Quantity<>(5.0,
+                                WeightUnit.KILOGRAM);
+
+                System.out.println(
+                                "10 KG / 5 KG = "
+                                                + weight1.divide(weight2));
 
                 System.out.println();
         }

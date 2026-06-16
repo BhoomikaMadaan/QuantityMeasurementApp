@@ -426,4 +426,105 @@ public class QuantityMeasurementAppTest {
 
                                 0.01);
         }
+        // =========================
+        // UC12 Subtraction Tests
+        // =========================
+
+        @Test
+        public void testSubtraction_SameUnit() {
+
+                Quantity<LengthUnit> length1 = new Quantity<>(10.0,
+                                LengthUnit.FEET);
+
+                Quantity<LengthUnit> length2 = new Quantity<>(5.0,
+                                LengthUnit.FEET);
+
+                Quantity<LengthUnit> result = length1.subtract(length2);
+
+                assertEquals(
+                                5.0,
+                                result.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testSubtraction_CrossUnit() {
+
+                Quantity<LengthUnit> length1 = new Quantity<>(10.0,
+                                LengthUnit.FEET);
+
+                Quantity<LengthUnit> length2 = new Quantity<>(6.0,
+                                LengthUnit.INCHES);
+
+                Quantity<LengthUnit> result = length1.subtract(length2);
+
+                assertEquals(
+                                9.5,
+                                result.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testSubtraction_ExplicitTargetUnit() {
+
+                Quantity<LengthUnit> length1 = new Quantity<>(10.0,
+                                LengthUnit.FEET);
+
+                Quantity<LengthUnit> length2 = new Quantity<>(6.0,
+                                LengthUnit.INCHES);
+
+                Quantity<LengthUnit> result = length1.subtract(
+                                length2,
+                                LengthUnit.INCHES);
+
+                assertEquals(
+                                114.0,
+                                result.getValue(),
+                                0.01);
+        }
+
+        @Test
+        public void testSubtraction_ResultingInNegative() {
+
+                Quantity<LengthUnit> length1 = new Quantity<>(5.0,
+                                LengthUnit.FEET);
+
+                Quantity<LengthUnit> length2 = new Quantity<>(10.0,
+                                LengthUnit.FEET);
+
+                Quantity<LengthUnit> result = length1.subtract(length2);
+
+                assertEquals(
+                                -5.0,
+                                result.getValue(),
+                                0.01);
+        }
+
+        // =========================
+        // UC12 Validation Tests
+        // =========================
+
+        @Test
+        public void testSubtraction_NullOperand() {
+
+                Quantity<LengthUnit> length = new Quantity<>(10.0,
+                                LengthUnit.FEET);
+
+                assertThrows(
+                                IllegalArgumentException.class,
+
+                                () -> length.subtract(null));
+        }
+
+        @Test
+        public void testDivision_NullOperand() {
+
+                Quantity<LengthUnit> length = new Quantity<>(10.0,
+                                LengthUnit.FEET);
+
+                assertThrows(
+                                IllegalArgumentException.class,
+
+                                () -> length.divide(null));
+        }
 }

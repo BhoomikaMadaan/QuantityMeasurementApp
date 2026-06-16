@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.185" tests="31" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.157" tests="31" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="24"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IN"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-24\bin"/>
-    <property name="sun.java.command" value="C:\Users\bhoom\AppData\Local\Temp\surefire9444283400914898424\surefirebooter-20260616140943339_3.jar C:\Users\bhoom\AppData\Local\Temp\surefire9444283400914898424 2026-06-16T14-09-43_118-jvmRun1 surefire-20260616140943339_1tmp surefire_0-20260616140943339_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\bhoom\AppData\Local\Temp\surefire9869658169291510772\surefirebooter-20260616142307958_3.jar C:\Users\bhoom\AppData\Local\Temp\surefire9869658169291510772 2026-06-16T14-23-07_728-jvmRun1 surefire-20260616142307958_1tmp surefire_0-20260616142307958_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="D:\BridgeLabz\QuantityMeasurementApp\target\test-classes;D:\BridgeLabz\QuantityMeasurementApp\target\classes;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.0\junit-jupiter-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\bhoom\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\bhoom\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.0\junit-jupiter-params-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\bhoom\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\bhoom\AppData\Local\Temp\surefire9444283400914898424\surefirebooter-20260616140943339_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\bhoom\AppData\Local\Temp\surefire9869658169291510772\surefirebooter-20260616142307958_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="24.0.1+9-30"/>
@@ -58,35 +58,35 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="68.0"/>
   </properties>
-  <testcase name="testFeetInchesComparison" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.05"/>
-  <testcase name="testAddition_ExplicitTargetUnit_Feet" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.003"/>
-  <testcase name="testVolumeAddition_ExplicitTargetUnit" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.003"/>
+  <testcase name="testFeetInchesComparison" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.048"/>
+  <testcase name="testAddition_ExplicitTargetUnit_Feet" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.012"/>
+  <testcase name="testVolumeAddition_ExplicitTargetUnit" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
   <testcase name="testSubtraction_SameUnit" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
   <testcase name="testWeightVsLength_Incompatible" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
-  <testcase name="testVolumeAdditionCommutativity" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testSubtraction_NullOperand" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testFeetEquality" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testVolumeAddition" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testVolumeConversion_LitreToMillilitre" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testVolumeAdditionCommutativity" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testSubtraction_NullOperand" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.004"/>
+  <testcase name="testFeetEquality" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testVolumeAddition" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testVolumeConversion_LitreToMillilitre" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
   <testcase name="testCrossUnitInequality" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
   <testcase name="testVolumeVsWeight_Incompatible" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
   <testcase name="testNullUnitThrowsException" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
   <testcase name="testWeightAddition" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
-  <testcase name="testConversion_YardsToFeet" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testAddition_ExplicitTargetUnit_Inches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testNullComparison" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.0"/>
+  <testcase name="testConversion_YardsToFeet" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testAddition_ExplicitTargetUnit_Inches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testNullComparison" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
   <testcase name="testConversion_FeetToInches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
-  <testcase name="testDivision_NullOperand" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.003"/>
-  <testcase name="testVolumeConversion_GallonToLitre" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.003"/>
-  <testcase name="testAdditionCommutativity" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testVolumeEquality" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testSubtraction_ExplicitTargetUnit" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testAddition_ExplicitTargetUnit_Yards" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
+  <testcase name="testDivision_NullOperand" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testVolumeConversion_GallonToLitre" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testAdditionCommutativity" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testVolumeEquality" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testSubtraction_ExplicitTargetUnit" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testAddition_ExplicitTargetUnit_Yards" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
   <testcase name="testWeightConversion" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
-  <testcase name="testSubtraction_ResultingInNegative" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.0"/>
+  <testcase name="testSubtraction_ResultingInNegative" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
   <testcase name="testVolumeVsLength_Incompatible" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
   <testcase name="addFeetToFeet" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
-  <testcase name="addFeetToInches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testSubtraction_CrossUnit" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testWeightEquality" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.002"/>
+  <testcase name="addFeetToInches" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testSubtraction_CrossUnit" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testWeightEquality" classname="com.app.quantitymeasurement.QuantityMeasurementAppTest" time="0.001"/>
 </testsuite>

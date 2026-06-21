@@ -16,8 +16,22 @@ public class QuantityMeasurementApp {
                 demonstrateSubtractionOperations();
 
                 demonstrateDivisionOperations();
+                demonstrateTemperatureOperations();
 
                 demonstrateCrossCategorySafety();
+
+                System.out.println(TemperatureUnit.CELSIUS.getClass());
+                System.out.println(TemperatureUnit.FAHRENHEIT.getClass());
+                System.out.println(TemperatureUnit.KELVIN.getClass());
+
+                System.out.println(
+                                TemperatureUnit.CELSIUS.convertToBaseUnit(0));
+
+                System.out.println(
+                                TemperatureUnit.FAHRENHEIT.convertToBaseUnit(32));
+
+                System.out.println(
+                                TemperatureUnit.KELVIN.convertToBaseUnit(273.15));
         }
 
         /**
@@ -249,6 +263,68 @@ public class QuantityMeasurementApp {
                 System.out.println(
                                 "10 KG / 5 KG = "
                                                 + weight1.divide(weight2));
+
+                System.out.println();
+        }
+
+        /**
+         * UC-14Temperature Demonstration
+         */
+        private static void demonstrateTemperatureOperations() {
+
+                System.out.println(
+                                "----- Temperature Operations -----");
+
+                Quantity<TemperatureUnit> celsius = new Quantity<>(
+                                0.0,
+                                TemperatureUnit.CELSIUS);
+
+                Quantity<TemperatureUnit> fahrenheit = new Quantity<>(
+                                32.0,
+                                TemperatureUnit.FAHRENHEIT);
+
+                Quantity<TemperatureUnit> kelvin = new Quantity<>(
+                                273.15,
+                                TemperatureUnit.KELVIN);
+
+                System.out.println(
+                                "0°C equals 32°F ?");
+
+                System.out.println(
+                                celsius.equals(fahrenheit));
+
+                System.out.println(
+                                "0°C equals 273.15K ?");
+
+                System.out.println(
+                                celsius.equals(kelvin));
+
+                System.out.println(
+                                "\nConvert 100°C to Fahrenheit:");
+
+                Quantity<TemperatureUnit> boilingPoint = new Quantity<>(
+                                100.0,
+                                TemperatureUnit.CELSIUS);
+
+                System.out.println(
+                                boilingPoint.convertTo(
+                                                TemperatureUnit.FAHRENHEIT));
+
+                System.out.println(
+                                "\nUnsupported Operation Demo:");
+
+                try {
+
+                        celsius.add(
+                                        new Quantity<>(
+                                                        10.0,
+                                                        TemperatureUnit.CELSIUS));
+
+                } catch (UnsupportedOperationException ex) {
+
+                        System.out.println(
+                                        ex.getMessage());
+                }
 
                 System.out.println();
         }

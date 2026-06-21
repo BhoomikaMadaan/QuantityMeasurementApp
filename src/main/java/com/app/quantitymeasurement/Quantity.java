@@ -4,333 +4,345 @@ import java.util.Objects;
 
 public class Quantity<U extends IMeasurable> {
 
-    // UC-13 REFACTOR: Introduced ArithmeticOperation enum to encapsulate arithmetic
-    // operations and their logic.
+        // UC-13 REFACTOR: Introduced ArithmeticOperation enum to encapsulate arithmetic
+        // operations and their logic.
 
-    private enum ArithmeticOperation {
+        private enum ArithmeticOperation {
 
-        ADD {
-            @Override
-            double compute(
-                    double left,
-                    double right) {
+                ADD {
+                        @Override
+                        double compute(
+                                        double left,
+                                        double right) {
 
-                return left + right;
-            }
-        },
+                                return left + right;
+                        }
+                },
 
-        SUBTRACT {
-            @Override
-            double compute(
-                    double left,
-                    double right) {
+                SUBTRACT {
+                        @Override
+                        double compute(
+                                        double left,
+                                        double right) {
 
-                return left - right;
-            }
-        },
+                                return left - right;
+                        }
+                },
 
-        DIVIDE {
-            @Override
-            double compute(
-                    double left,
-                    double right) {
+                DIVIDE {
+                        @Override
+                        double compute(
+                                        double left,
+                                        double right) {
 
-                if (Double.compare(
-                        right,
-                        0.0) == 0) {
+                                if (Double.compare(
+                                                right,
+                                                0.0) == 0) {
 
-                    throw new ArithmeticException(
-                            "Division by zero");
+                                        throw new ArithmeticException(
+                                                        "Division by zero");
+                                }
+
+                                return left / right;
+                        }
+                };
+
+                abstract double compute(
+                                double left,
+                                double right);
+        }
+
+        private final double value;
+
+        private final U unit;
+
+        /**
+         * Constructor
+         */
+        public Quantity(
+                        double value,
+                        U unit) {
+
+                if (unit == null) {
+
+                        throw new IllegalArgumentException(
+                                        "Unit cannot be null");
                 }
 
-                return left / right;
-            }
-        };
+                if (Double.isNaN(value)
+                                || Double.isInfinite(value)) {
 
-        abstract double compute(
-                double left,
-                double right);
-    }
+                        throw new IllegalArgumentException(
+                                        "Invalid quantity value");
+                }
 
-    private final double value;
-
-    private final U unit;
-
-    /**
-     * Constructor
-     */
-    public Quantity(
-            double value,
-            U unit) {
-
-        if (unit == null) {
-
-            throw new IllegalArgumentException(
-                    "Unit cannot be null");
+                this.value = value;
+                this.unit = unit;
         }
 
-        if (Double.isNaN(value)
-                || Double.isInfinite(value)) {
+        /**
+         * Convert current quantity
+         * to base unit
+         */
+        private double convertToBaseUnit() {
 
-            throw new IllegalArgumentException(
-                    "Invalid quantity value");
+                return unit.convertToBaseUnit(value);
         }
 
-        this.value = value;
-        this.unit = unit;
-    }
+        // UC13-Validate operands for arithmetic operations
 
-    /**
-     * Convert current quantity
-     * to base unit
-     */
-    private double convertToBaseUnit() {
+        private void validateArithmeticOperands(
+                        Quantity<U> other,
+                        U targetUnit,
+                        boolean targetUnitRequired) {
 
-        return unit.convertToBaseUnit(value);
-    }
+                if (other == null) {
 
-    // UC13-Validate operands for arithmetic operations
+                        throw new IllegalArgumentException(
+                                        "Quantity cannot be null");
+                }
 
-    private void validateArithmeticOperands(
-            Quantity<U> other,
-            U targetUnit,
-            boolean targetUnitRequired) {
+                if (this.unit.getClass() != other.unit.getClass()) {
 
-        if (other == null) {
+                        throw new IllegalArgumentException(
+                                        "Incompatible measurement categories");
+                }
 
-            throw new IllegalArgumentException(
-                    "Quantity cannot be null");
+                if (Double.isNaN(this.value)
+                                || Double.isInfinite(this.value)
+                                || Double.isNaN(other.value)
+                                || Double.isInfinite(other.value)) {
+
+                        throw new IllegalArgumentException(
+                                        "Invalid quantity value");
+                }
+
+                if (targetUnitRequired
+                                && targetUnit == null) {
+
+                        throw new IllegalArgumentException(
+                                        "Target unit cannot be null");
+                }
         }
 
-        if (this.unit.getClass() != other.unit.getClass()) {
+        // UC13-Refactored arithmetic operations to use performBaseArithmetic method
+        private double performBaseArithmetic(
+                        Quantity<U> other,
+                        ArithmeticOperation operation) {
 
-            throw new IllegalArgumentException(
-                    "Incompatible measurement categories");
+                double left = this.convertToBaseUnit();
+
+                double right = other.convertToBaseUnit();
+
+                return operation.compute(
+                                left,
+                                right);
         }
 
-        if (Double.isNaN(this.value)
-                || Double.isInfinite(this.value)
-                || Double.isNaN(other.value)
-                || Double.isInfinite(other.value)) {
+        /**
+         * Equality check
+         */
+        @Override
+        public boolean equals(Object obj) {
 
-            throw new IllegalArgumentException(
-                    "Invalid quantity value");
+                if (this == obj)
+                        return true;
+
+                if (obj == null)
+                        return false;
+
+                if (getClass() != obj.getClass())
+                        return false;
+
+                Quantity<?> other = (Quantity<?>) obj;
+
+                if (((Enum<?>) this.unit).getDeclaringClass() != ((Enum<?>) other.unit).getDeclaringClass()) {
+
+                        return false;
+                }
+
+                return Math.abs(
+                                this.convertToBaseUnit()
+                                                - other.convertToBaseUnit()) < 0.0001;
         }
 
-        if (targetUnitRequired
-                && targetUnit == null) {
+        /**
+         * hashCode()
+         */
+        @Override
+        public int hashCode() {
 
-            throw new IllegalArgumentException(
-                    "Target unit cannot be null");
-        }
-    }
-
-    // UC13-Refactored arithmetic operations to use performBaseArithmetic method
-    private double performBaseArithmetic(
-            Quantity<U> other,
-            ArithmeticOperation operation) {
-
-        double left = this.convertToBaseUnit();
-
-        double right = other.convertToBaseUnit();
-
-        return operation.compute(
-                left,
-                right);
-    }
-
-    /**
-     * Equality check
-     */
-    @Override
-    public boolean equals(Object obj) {
-
-        // Same reference
-        if (this == obj)
-            return true;
-
-        // Null check
-        if (obj == null)
-            return false;
-
-        // Same class check
-        if (getClass() != obj.getClass())
-            return false;
-
-        Quantity<?> other = (Quantity<?>) obj;
-
-        // Cross-category prevention
-        if (this.unit.getClass() != other.unit.getClass()) {
-
-            return false;
+                return Objects.hash(
+                                convertToBaseUnit(),
+                                ((Enum<?>) unit).getDeclaringClass());
         }
 
-        return Double.compare(
-                this.convertToBaseUnit(),
-                other.convertToBaseUnit()) == 0;
-    }
+        /**
+         * Convert to target unit
+         */
+        public Quantity<U> convertTo(
+                        U targetUnit) {
 
-    /**
-     * hashCode()
-     */
-    @Override
-    public int hashCode() {
+                if (targetUnit == null) {
 
-        return Objects.hash(
-                convertToBaseUnit(),
-                unit.getClass());
-    }
+                        throw new IllegalArgumentException(
+                                        "Target unit cannot be null");
+                }
 
-    /**
-     * Convert to target unit
-     */
-    public Quantity<U> convertTo(
-            U targetUnit) {
+                double baseValue = this.convertToBaseUnit();
 
-        if (targetUnit == null) {
+                double convertedValue = targetUnit.convertFromBaseUnit(
+                                baseValue);
 
-            throw new IllegalArgumentException(
-                    "Target unit cannot be null");
+                return new Quantity<>(
+                                convertedValue,
+                                targetUnit);
         }
 
-        double baseValue = this.convertToBaseUnit();
+        /**
+         * UC-13 refactor add method to use performBaseArithmetic for addition
+         */
+        public Quantity<U> add(
+                        Quantity<U> other) {
 
-        double convertedValue = targetUnit.convertFromBaseUnit(
-                baseValue);
+                validateArithmeticOperands(
+                                other,
+                                null,
+                                false);
+                /**
+                 * UC-14
+                 */
+                this.unit.validateOperationSupport(
+                                "ADD");
 
-        return new Quantity<>(
-                convertedValue,
-                targetUnit);
-    }
+                double resultBaseValue = performBaseArithmetic(
+                                other,
+                                ArithmeticOperation.ADD);
 
-    /**
-     * UC-13 refactor add method to use performBaseArithmetic for addition
-     */
-    public Quantity<U> add(
-            Quantity<U> other) {
+                double result = this.unit.convertFromBaseUnit(
+                                resultBaseValue);
 
-        validateArithmeticOperands(
-                other,
-                null,
-                false);
+                return new Quantity<>(
+                                result,
+                                this.unit);
+        }
 
-        double resultBaseValue = performBaseArithmetic(
-                other,
-                ArithmeticOperation.ADD);
+        /**
+         * UC13 -refactor add method to use performBaseArithmetic for addition with
+         * explicit target unit
+         */
+        public Quantity<U> add(
+                        Quantity<U> other,
+                        U targetUnit) {
 
-        double result = this.unit.convertFromBaseUnit(
-                resultBaseValue);
+                validateArithmeticOperands(
+                                other,
+                                targetUnit,
+                                true);
 
-        return new Quantity<>(
-                result,
-                this.unit);
-    }
+                this.unit.validateOperationSupport(
+                                "ADD");
 
-    /**
-     * UC13 -refactor add method to use performBaseArithmetic for addition with
-     * explicit target unit
-     */
-    public Quantity<U> add(
-            Quantity<U> other,
-            U targetUnit) {
+                double resultBaseValue = performBaseArithmetic(
+                                other,
+                                ArithmeticOperation.ADD);
 
-        validateArithmeticOperands(
-                other,
-                targetUnit,
-                true);
+                double convertedValue = targetUnit.convertFromBaseUnit(
+                                resultBaseValue);
 
-        double resultBaseValue = performBaseArithmetic(
-                other,
-                ArithmeticOperation.ADD);
+                return new Quantity<>(
+                                convertedValue,
+                                targetUnit);
+        }
 
-        double convertedValue = targetUnit.convertFromBaseUnit(
-                resultBaseValue);
+        /**
+         * UC13-Refactor subtract method to use performBaseArithmetic for subtraction
+         */
+        public Quantity<U> subtract(
+                        Quantity<U> other) {
 
-        return new Quantity<>(
-                convertedValue,
-                targetUnit);
-    }
+                validateArithmeticOperands(
+                                other,
+                                null,
+                                false);
+                this.unit.validateOperationSupport(
+                                "SUBTRACT");
 
-    /**
-     * UC13-Refactor subtract method to use performBaseArithmetic for subtraction
-     */
-    public Quantity<U> subtract(
-            Quantity<U> other) {
+                double resultBaseValue = performBaseArithmetic(
+                                other,
+                                ArithmeticOperation.SUBTRACT);
 
-        validateArithmeticOperands(
-                other,
-                null,
-                false);
+                double result = this.unit.convertFromBaseUnit(
+                                resultBaseValue);
 
-        double resultBaseValue = performBaseArithmetic(
-                other,
-                ArithmeticOperation.SUBTRACT);
+                return new Quantity<>(
+                                result,
+                                this.unit);
+        }
 
-        double result = this.unit.convertFromBaseUnit(
-                resultBaseValue);
+        /**
+         * UC 13 -refactor subtract method to use performBaseArithmetic for subtraction
+         * with
+         */
+        public Quantity<U> subtract(
+                        Quantity<U> other,
+                        U targetUnit) {
 
-        return new Quantity<>(
-                result,
-                this.unit);
-    }
+                validateArithmeticOperands(
+                                other,
+                                targetUnit,
+                                true);
 
-    /**
-     * UC 13 -refactor subtract method to use performBaseArithmetic for subtraction
-     * with
-     */
-    public Quantity<U> subtract(
-            Quantity<U> other,
-            U targetUnit) {
+                this.unit.validateOperationSupport(
+                                "SUBTRACT");
 
-        validateArithmeticOperands(
-                other,
-                targetUnit,
-                true);
+                double resultBaseValue = performBaseArithmetic(
+                                other,
+                                ArithmeticOperation.SUBTRACT);
 
-        double resultBaseValue = performBaseArithmetic(
-                other,
-                ArithmeticOperation.SUBTRACT);
+                double convertedValue = targetUnit.convertFromBaseUnit(
+                                resultBaseValue);
 
-        double convertedValue = targetUnit.convertFromBaseUnit(
-                resultBaseValue);
+                return new Quantity<>(
+                                convertedValue,
+                                targetUnit);
+        }
 
-        return new Quantity<>(
-                convertedValue,
-                targetUnit);
-    }
+        /**
+         * UC13 - Refactor divide method to use performBaseArithmetic for division
+         */
+        public double divide(
+                        Quantity<U> other) {
 
-    /**
-     * UC13 - Refactor divide method to use performBaseArithmetic for division
-     */
-    public double divide(
-            Quantity<U> other) {
+                validateArithmeticOperands(
+                                other,
+                                null,
+                                false);
 
-        validateArithmeticOperands(
-                other,
-                null,
-                false);
+                this.unit.validateOperationSupport(
+                                "DIVIDE");
 
-        return performBaseArithmetic(
-                other,
-                ArithmeticOperation.DIVIDE);
-    }
+                return performBaseArithmetic(
+                                other,
+                                ArithmeticOperation.DIVIDE);
+        }
 
-    @Override
-    public String toString() {
+        @Override
+        public String toString() {
 
-        return String.format(
-                "%.2f %s",
-                value,
-                unit.getUnitName());
-    }
+                return String.format(
+                                "%.2f %s",
+                                value,
+                                unit.getUnitName());
+        }
 
-    public double getValue() {
+        public double getValue() {
 
-        return value;
-    }
+                return value;
+        }
 
-    public U getUnit() {
+        public U getUnit() {
 
-        return unit;
-    }
+                return unit;
+        }
 }

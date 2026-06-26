@@ -49,4 +49,10 @@ public enum VolumeUnit
 
         return this.name();
     }
+    
+    @Override
+    public String getMeasurementType() {
+
+        return this.getClass().getSimpleName();
+    }
 }

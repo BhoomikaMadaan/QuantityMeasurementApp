@@ -49,4 +49,10 @@ public enum WeightUnit
 
         return this.name();
     }
+    
+    @Override
+    public String getMeasurementType() {
+
+        return this.getClass().getSimpleName();
+    }
 }

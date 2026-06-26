@@ -1,6 +1,18 @@
 package com.app.quantitymeasurement;
+import com.app.quantitymeasurement.controller.QuantityMeasurementController;
+import com.app.quantitymeasurement.dto.QuantityDTO;
+import com.app.quantitymeasurement.repository.QuantityMeasurementCacheRepository;
+import com.app.quantitymeasurement.service.IQuantityMeasurementService;
+import com.app.quantitymeasurement.service.QuantityMeasurementServiceImpl;
 
 public class QuantityMeasurementApp {
+	
+	private static final IQuantityMeasurementService service =
+	        new QuantityMeasurementServiceImpl(
+	                QuantityMeasurementCacheRepository.getInstance());
+
+	private static final QuantityMeasurementController controller =
+	        new QuantityMeasurementController(service);
 
         public static void main(String[] args) {
 
@@ -19,19 +31,19 @@ public class QuantityMeasurementApp {
                 demonstrateTemperatureOperations();
 
                 demonstrateCrossCategorySafety();
+//
+//                System.out.println(TemperatureUnit.CELSIUS.getClass());
+//                System.out.println(TemperatureUnit.FAHRENHEIT.getClass());
+//                System.out.println(TemperatureUnit.KELVIN.getClass());
 
-                System.out.println(TemperatureUnit.CELSIUS.getClass());
-                System.out.println(TemperatureUnit.FAHRENHEIT.getClass());
-                System.out.println(TemperatureUnit.KELVIN.getClass());
-
-                System.out.println(
-                                TemperatureUnit.CELSIUS.convertToBaseUnit(0));
-
-                System.out.println(
-                                TemperatureUnit.FAHRENHEIT.convertToBaseUnit(32));
-
-                System.out.println(
-                                TemperatureUnit.KELVIN.convertToBaseUnit(273.15));
+//                System.out.println(
+//                                TemperatureUnit.CELSIUS.convertToBaseUnit(0));
+//
+//                System.out.println(
+//                                TemperatureUnit.FAHRENHEIT.convertToBaseUnit(32));
+//
+//                System.out.println(
+//                                TemperatureUnit.KELVIN.convertToBaseUnit(273.15));
         }
 
         /**
@@ -42,14 +54,15 @@ public class QuantityMeasurementApp {
                 System.out.println(
                                 "----- Length Operations -----");
 
-                Quantity<LengthUnit> length1 = new Quantity<>(
+                QuantityDTO<LengthUnit> length1 =
+                        new QuantityDTO<>(
                                 1.0,
                                 LengthUnit.FEET);
 
-                Quantity<LengthUnit> length2 = new Quantity<>(
+                QuantityDTO<LengthUnit> length2 =
+                        new QuantityDTO<>(
                                 12.0,
                                 LengthUnit.INCHES);
-
                 System.out.println(
                                 "Length 1: " + length1);
 
@@ -60,30 +73,40 @@ public class QuantityMeasurementApp {
                                 "\nEquality Check:");
 
                 System.out.println(
-                                length1.equals(length2));
+                        controller.performComparison(
+                                length1,
+                                length2));
 
                 System.out.println(
                                 "\nAddition:");
 
-                Quantity<LengthUnit> result = length1.add(length2);
-
+                Quantity<LengthUnit> result =
+                        controller.performAddition(
+                                length1,
+                                length2);
                 System.out.println(result);
 
                 System.out.println(
                                 "\nAddition in INCHES:");
 
-                Quantity<LengthUnit> inchResult = length1.add(
+                Quantity<LengthUnit> inchResult =
+                        controller.performAddition(
+                                length1,
                                 length2,
                                 LengthUnit.INCHES);
 
                 System.out.println(inchResult);
 
+                
+                
+
                 System.out.println(
                                 "\nConvert FEET to YARDS:");
 
                 System.out.println(
-                                length1.convertTo(
-                                                LengthUnit.YARDS));
+                        controller.performConversion(
+                                length1,
+                                LengthUnit.YARDS));
 
                 System.out.println();
         }
@@ -96,11 +119,13 @@ public class QuantityMeasurementApp {
                 System.out.println(
                                 "----- Weight Operations -----");
 
-                Quantity<WeightUnit> weight1 = new Quantity<>(
+                QuantityDTO<WeightUnit> weight1 =
+                        new QuantityDTO<>(
                                 1.0,
                                 WeightUnit.KILOGRAM);
 
-                Quantity<WeightUnit> weight2 = new Quantity<>(
+                QuantityDTO<WeightUnit> weight2 =
+                        new QuantityDTO<>(
                                 1000.0,
                                 WeightUnit.GRAM);
 
@@ -111,34 +136,45 @@ public class QuantityMeasurementApp {
                                 "Weight 2: " + weight2);
 
                 System.out.println(
-                                "\nEquality Check:");
+                        "\nEquality Check:");
 
-                System.out.println(
-                                weight1.equals(weight2));
+        System.out.println(
+                controller.performComparison(
+                        weight1,
+                        weight2));
 
                 System.out.println(
                                 "\nAddition:");
 
-                Quantity<WeightUnit> result = weight1.add(weight2);
-
+                Quantity<WeightUnit> result =controller.performAddition(
+                        weight1,
+                        weight2);
+                
+                controller.performAddition(
+                        weight1,
+                        weight2,
+                        WeightUnit.GRAM);
                 System.out.println(result);
 
+
+                
+
                 System.out.println(
-                                "\nAddition in GRAM:");
+                        "\nAddition in GRAM:");
 
-                Quantity<WeightUnit> gramResult = weight1.add(
-                                weight2,
-                                WeightUnit.GRAM);
+        Quantity<WeightUnit> gramResult =
+                controller.performAddition(
+                        weight1,
+                        weight2,
+                        WeightUnit.GRAM);
 
-                System.out.println(gramResult);
-
+        System.out.println(gramResult);
                 System.out.println(
                                 "\nConvert KG to POUND:");
 
-                System.out.println(
-                                weight1.convertTo(
-                                                WeightUnit.POUND));
-
+                System.out.println(controller.performConversion(
+                        weight1,
+                        WeightUnit.POUND));
                 System.out.println();
         }
 
@@ -150,15 +186,18 @@ public class QuantityMeasurementApp {
                 System.out.println(
                                 "----- Volume Operations -----");
 
-                Quantity<VolumeUnit> volume1 = new Quantity<>(
+                QuantityDTO<VolumeUnit> volume1 =
+                        new QuantityDTO<>(
                                 1.0,
                                 VolumeUnit.LITRE);
 
-                Quantity<VolumeUnit> volume2 = new Quantity<>(
+                QuantityDTO<VolumeUnit> volume2 =
+                        new QuantityDTO<>(
                                 1000.0,
                                 VolumeUnit.MILLILITRE);
 
-                Quantity<VolumeUnit> volume3 = new Quantity<>(
+                QuantityDTO<VolumeUnit> volume3 =
+                        new QuantityDTO<>(
                                 1.0,
                                 VolumeUnit.GALLON);
 
@@ -175,19 +214,30 @@ public class QuantityMeasurementApp {
                                 "\nEquality Check:");
 
                 System.out.println(
-                                volume1.equals(volume2));
+                        controller.performComparison(
+                                volume1,
+                                volume2));
 
                 System.out.println(
                                 "\nAddition:");
 
-                Quantity<VolumeUnit> result = volume1.add(volume2);
-
+                Quantity<VolumeUnit> result =
+                        controller.performAddition(
+                                volume1,
+                                volume2);
+                
+                controller.performAddition(
+                        volume1,
+                        volume2,
+                        VolumeUnit.MILLILITRE);
                 System.out.println(result);
 
                 System.out.println(
-                                "\nAddition in MILLILITRE:");
+                        "\nAddition in MILLILITRE:");
 
-                Quantity<VolumeUnit> mlResult = volume1.add(
+                Quantity<VolumeUnit> mlResult =
+                        controller.performAddition(
+                                volume1,
                                 volume2,
                                 VolumeUnit.MILLILITRE);
 
@@ -197,8 +247,9 @@ public class QuantityMeasurementApp {
                                 "\nConvert GALLON to LITRE:");
 
                 System.out.println(
-                                volume3.convertTo(
-                                                VolumeUnit.LITRE));
+                        controller.performConversion(
+                                volume3,
+                                VolumeUnit.LITRE));
 
                 System.out.println();
         }
@@ -208,30 +259,33 @@ public class QuantityMeasurementApp {
          */
         private static void demonstrateSubtractionOperations() {
 
-                System.out.println(
-                                "----- Subtraction Operations -----");
+            System.out.println(
+                    "----- Subtraction Operations -----");
 
-                Quantity<LengthUnit> length1 = new Quantity<>(10.0,
-                                LengthUnit.FEET);
+            QuantityDTO<LengthUnit> length1 =
+                    new QuantityDTO<>(
+                            10.0,
+                            LengthUnit.FEET);
 
-                Quantity<LengthUnit> length2 = new Quantity<>(6.0,
-                                LengthUnit.INCHES);
+            QuantityDTO<LengthUnit> length2 =
+                    new QuantityDTO<>(
+                            6.0,
+                            LengthUnit.INCHES);
 
-                Quantity<LengthUnit> result = length1.subtract(length2);
+            System.out.println(
+                    "10 FEET - 6 INCHES = "
+                            + controller.performSubtraction(
+                                    length1,
+                                    length2));
 
-                System.out.println(
-                                "10 FEET - 6 INCHES = "
-                                                + result);
+            System.out.println(
+                    "10 FEET - 6 INCHES (INCHES) = "
+                            + controller.performSubtraction(
+                                    length1,
+                                    length2,
+                                    LengthUnit.INCHES));
 
-                Quantity<LengthUnit> inchResult = length1.subtract(
-                                length2,
-                                LengthUnit.INCHES);
-
-                System.out.println(
-                                "10 FEET - 6 INCHES (INCHES) = "
-                                                + inchResult);
-
-                System.out.println();
+            System.out.println();
         }
 
         /**
@@ -239,32 +293,42 @@ public class QuantityMeasurementApp {
          */
         private static void demonstrateDivisionOperations() {
 
-                System.out.println(
-                                "----- Division Operations -----");
+            System.out.println(
+                    "----- Division Operations -----");
 
-                Quantity<LengthUnit> length1 = new Quantity<>(24.0,
-                                LengthUnit.INCHES);
+            QuantityDTO<LengthUnit> length1 =
+                    new QuantityDTO<>(
+                            24.0,
+                            LengthUnit.INCHES);
 
-                Quantity<LengthUnit> length2 = new Quantity<>(2.0,
-                                LengthUnit.FEET);
+            QuantityDTO<LengthUnit> length2 =
+                    new QuantityDTO<>(
+                            2.0,
+                            LengthUnit.FEET);
 
-                double ratio = length1.divide(length2);
+            System.out.println(
+                    "24 INCHES / 2 FEET = "
+                            + controller.performDivision(
+                                    length1,
+                                    length2));
 
-                System.out.println(
-                                "24 INCHES / 2 FEET = "
-                                                + ratio);
+            QuantityDTO<WeightUnit> weight1 =
+                    new QuantityDTO<>(
+                            10.0,
+                            WeightUnit.KILOGRAM);
 
-                Quantity<WeightUnit> weight1 = new Quantity<>(10.0,
-                                WeightUnit.KILOGRAM);
+            QuantityDTO<WeightUnit> weight2 =
+                    new QuantityDTO<>(
+                            5.0,
+                            WeightUnit.KILOGRAM);
 
-                Quantity<WeightUnit> weight2 = new Quantity<>(5.0,
-                                WeightUnit.KILOGRAM);
+            System.out.println(
+                    "10 KG / 5 KG = "
+                            + controller.performDivision(
+                                    weight1,
+                                    weight2));
 
-                System.out.println(
-                                "10 KG / 5 KG = "
-                                                + weight1.divide(weight2));
-
-                System.out.println();
+            System.out.println();
         }
 
         /**
@@ -275,15 +339,18 @@ public class QuantityMeasurementApp {
                 System.out.println(
                                 "----- Temperature Operations -----");
 
-                Quantity<TemperatureUnit> celsius = new Quantity<>(
-                                0.0,
+                QuantityDTO<TemperatureUnit> celsius =
+                        new QuantityDTO<>(
+                                0,
                                 TemperatureUnit.CELSIUS);
 
-                Quantity<TemperatureUnit> fahrenheit = new Quantity<>(
-                                32.0,
+                QuantityDTO<TemperatureUnit> fahrenheit =
+                        new QuantityDTO<>(
+                                32,
                                 TemperatureUnit.FAHRENHEIT);
 
-                Quantity<TemperatureUnit> kelvin = new Quantity<>(
+                QuantityDTO<TemperatureUnit> kelvin =
+                        new QuantityDTO<>(
                                 273.15,
                                 TemperatureUnit.KELVIN);
 
@@ -291,42 +358,45 @@ public class QuantityMeasurementApp {
                                 "0°C equals 32°F ?");
 
                 System.out.println(
-                                celsius.equals(fahrenheit));
+                        controller.performComparison(
+                                celsius,
+                                fahrenheit));
 
                 System.out.println(
                                 "0°C equals 273.15K ?");
 
                 System.out.println(
-                                celsius.equals(kelvin));
+                        controller.performComparison(
+                                celsius,
+                                kelvin));
 
                 System.out.println(
                                 "\nConvert 100°C to Fahrenheit:");
 
-                Quantity<TemperatureUnit> boilingPoint = new Quantity<>(
-                                100.0,
+                QuantityDTO<TemperatureUnit> boilingPoint =
+                        new QuantityDTO<>(
+                                100,
                                 TemperatureUnit.CELSIUS);
 
                 System.out.println(
-                                boilingPoint.convertTo(
-                                                TemperatureUnit.FAHRENHEIT));
-
+                        controller.performConversion(
+                                boilingPoint,
+                                TemperatureUnit.FAHRENHEIT));
                 System.out.println(
                                 "\nUnsupported Operation Demo:");
 
                 try {
 
-                        celsius.add(
-                                        new Quantity<>(
-                                                        10.0,
-                                                        TemperatureUnit.CELSIUS));
+                    controller.performAddition(
+                            celsius,
+                            fahrenheit);
 
-                } catch (UnsupportedOperationException ex) {
-
-                        System.out.println(
-                                        ex.getMessage());
                 }
+                catch (Exception e) {
 
-                System.out.println();
+                    System.out.println(e.getMessage());
+
+                }
         }
 
         /**

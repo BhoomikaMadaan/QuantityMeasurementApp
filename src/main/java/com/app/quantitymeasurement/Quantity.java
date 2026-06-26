@@ -345,4 +345,9 @@ public class Quantity<U extends IMeasurable> {
 
                 return unit;
         }
+
+		public static Object fromName(String targetUnit) {
+			
+			return null;
+		}
 }

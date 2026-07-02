@@ -4,6 +4,7 @@ import com.app.quantitymeasurement.IMeasurable;
 import com.app.quantitymeasurement.Quantity;
 import com.app.quantitymeasurement.dto.QuantityDTO;
 import com.app.quantitymeasurement.repository.IQuantityMeasurementRepository;
+import com.app.quantitymeasurement.entity.QuantityMeasurementEntity;
 
 public class QuantityMeasurementServiceImpl
         implements IQuantityMeasurementService {
@@ -46,6 +47,7 @@ public class QuantityMeasurementServiceImpl
 	    abstract double apply(double left, double right);
 	}
 	
+ 	
 	private <U extends IMeasurable> boolean compare(
 	        Quantity<U> quantity1,
 	        Quantity<U> quantity2) {
@@ -123,7 +125,18 @@ public class QuantityMeasurementServiceImpl
 	            quantity2.getValue(),
 	            quantity2.getUnit());
 
-	    return compare(q1, q2);
+	    boolean result = compare(q1, q2);
+
+	    QuantityMeasurementEntity entity =
+	            new QuantityMeasurementEntity(
+	                    q1,
+	                    q2,
+	                    "COMPARE",
+	                    String.valueOf(result));
+
+	    repository.save(entity);
+
+	    return result;
 	}
 
 	@Override
@@ -135,7 +148,18 @@ public class QuantityMeasurementServiceImpl
 	            quantity.getValue(),
 	            quantity.getUnit());
 
-	    return convertTo(q, targetUnit);
+	    Quantity<U> result = convertTo(q, targetUnit);
+
+	    QuantityMeasurementEntity entity =
+	            new QuantityMeasurementEntity(
+	                    q,
+	                    null,
+	                    "CONVERT",
+	                    result);
+
+	    repository.save(entity);
+
+	    return result;
 	}
 
 	@Override
@@ -160,9 +184,21 @@ public class QuantityMeasurementServiceImpl
 	    double converted =
 	            q1.getUnit().convertFromBaseUnit(resultBase);
 
-	    return new Quantity<>(
-	            converted,
-	            q1.getUnit());
+	    Quantity<U> result =
+	            new Quantity<>(
+	                    converted,
+	                    q1.getUnit());
+
+	    QuantityMeasurementEntity entity =
+	            new QuantityMeasurementEntity(
+	                    q1,
+	                    q2,
+	                    "ADD",
+	                    result);
+
+	    repository.save(entity);
+
+	    return result;
 	}
 
 	
@@ -182,9 +218,21 @@ public class QuantityMeasurementServiceImpl
 	                    quantity2.getValue(),
 	                    quantity2.getUnit());
 
-	    return q1.add(
-	            q2,
-	            targetUnit);
+	    Quantity<U> result =
+	            q1.add(
+	                    q2,
+	                    targetUnit);
+
+	    QuantityMeasurementEntity entity =
+	            new QuantityMeasurementEntity(
+	                    q1,
+	                    q2,
+	                    "ADD",
+	                    result);
+
+	    repository.save(entity);
+
+	    return result;
 	}
 	@Override
 	public <U extends IMeasurable> Quantity<U> subtract(
@@ -208,9 +256,21 @@ public class QuantityMeasurementServiceImpl
 	    double converted =
 	            q1.getUnit().convertFromBaseUnit(resultBase);
 
-	    return new Quantity<>(
-	            converted,
-	            q1.getUnit());
+	    Quantity<U> result =
+	            new Quantity<>(
+	                    converted,
+	                    q1.getUnit());
+
+	    QuantityMeasurementEntity entity =
+	            new QuantityMeasurementEntity(
+	                    q1,
+	                    q2,
+	                    "SUBTRACT",
+	                    result);
+
+	    repository.save(entity);
+
+	    return result;
 	}
 
 	
@@ -230,9 +290,21 @@ public class QuantityMeasurementServiceImpl
 	                    quantity2.getValue(),
 	                    quantity2.getUnit());
 
-	    return q1.subtract(
-	            q2,
-	            targetUnit);
+	    Quantity<U> result =
+	            q1.subtract(
+	                    q2,
+	                    targetUnit);
+
+	    QuantityMeasurementEntity entity =
+	            new QuantityMeasurementEntity(
+	                    q1,
+	                    q2,
+	                    "SUBTRACT",
+	                    result);
+
+	    repository.save(entity);
+
+	    return result;
 	}
 	@Override
 	public <U extends IMeasurable> double divide(
@@ -247,9 +319,26 @@ public class QuantityMeasurementServiceImpl
 	            quantity2.getValue(),
 	            quantity2.getUnit());
 
-	    return performArithmetic(
-	            q1,
-	            q2,
-	            ArithmeticOperation.DIVIDE);
+	    double result =
+	            performArithmetic(
+	                    q1,
+	                    q2,
+	                    ArithmeticOperation.DIVIDE);
+
+	    Quantity<U> resultQuantity =
+	            new Quantity<>(
+	                    result,
+	                    q1.getUnit());
+
+	    QuantityMeasurementEntity entity =
+	            new QuantityMeasurementEntity(
+	                    q1,
+	                    q2,
+	                    "DIVIDE",
+	                    resultQuantity);
+
+	    repository.save(entity);
+
+	    return result;
 	}
 }

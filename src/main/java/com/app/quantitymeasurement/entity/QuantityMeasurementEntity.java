@@ -111,6 +111,58 @@ public class QuantityMeasurementEntity implements Serializable {
         this.errorMessage = errorMessage;
         this.isError = isError;
     }
+    
+    public double getThisValue() {
+        return thisValue;
+    }
+
+    public String getThisUnit() {
+        return thisUnit;
+    }
+
+    public String getThisMeasurementType() {
+        return thisMeasurementType;
+    }
+
+    public double getThatValue() {
+        return otherValue;
+    }
+
+    public String getThatUnit() {
+        return otherUnit;
+    }
+
+    public String getThatMeasurementType() {
+        return otherMeasurementType;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public double getResultValue() {
+        return resultValue;
+    }
+
+    public String getResultUnit() {
+        return resultUnit;
+    }
+
+    public String getResultMeasurementType() {
+        return resultMeasurementType;
+    }
+
+    public String getResultString() {
+        return result;
+    }
+
+    public boolean isError() {
+        return isError;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
 
     @Override
     public String toString() {

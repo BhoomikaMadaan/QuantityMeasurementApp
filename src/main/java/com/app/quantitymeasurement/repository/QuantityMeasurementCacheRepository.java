@@ -81,4 +81,41 @@ public class QuantityMeasurementCacheRepository
 
         return measurements.size();
     }
+    @Override
+    public List<QuantityMeasurementEntity> getMeasurementsByOperation(
+            String operation) {
+
+        return new ArrayList<>();
+    }
+
+    @Override
+    public List<QuantityMeasurementEntity> getMeasurementsByType(
+            String measurementType) {
+
+        return new ArrayList<>();
+    }
+
+    @Override
+    public int getTotalCount() {
+
+        return measurements.size();
+    }
+
+    @Override
+    public void deleteAll() {
+
+        measurements.clear();
+    }
+
+    @Override
+    public String getPoolStatistics() {
+
+        return "Cache Repository";
+    }
+
+    @Override
+    public void releaseResources() {
+
+        // No resources to release
+    }
 }

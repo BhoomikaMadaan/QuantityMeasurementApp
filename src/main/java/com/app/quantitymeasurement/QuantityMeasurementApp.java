@@ -1,7 +1,7 @@
 package com.app.quantitymeasurement;
 import com.app.quantitymeasurement.controller.QuantityMeasurementController;
 import com.app.quantitymeasurement.dto.QuantityDTO;
-import com.app.quantitymeasurement.repository.QuantityMeasurementCacheRepository;
+import com.app.quantitymeasurement.repository.QuantityMeasurementDatabaseRepository;
 import com.app.quantitymeasurement.service.IQuantityMeasurementService;
 import com.app.quantitymeasurement.service.QuantityMeasurementServiceImpl;
 
@@ -9,7 +9,7 @@ public class QuantityMeasurementApp {
 	
 	private static final IQuantityMeasurementService service =
 	        new QuantityMeasurementServiceImpl(
-	                QuantityMeasurementCacheRepository.getInstance());
+	                QuantityMeasurementDatabaseRepository.getInstance());
 
 	private static final QuantityMeasurementController controller =
 	        new QuantityMeasurementController(service);
@@ -421,4 +421,5 @@ public class QuantityMeasurementApp {
                 System.out.println(
                                 length.equals(weight));
         }
+      
 }

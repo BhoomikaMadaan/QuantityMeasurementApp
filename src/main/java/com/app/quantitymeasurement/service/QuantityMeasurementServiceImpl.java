@@ -2,20 +2,28 @@ package com.app.quantitymeasurement.service;
 
 import com.app.quantitymeasurement.IMeasurable;
 import com.app.quantitymeasurement.Quantity;
-import com.app.quantitymeasurement.dto.QuantityDTO;
-import com.app.quantitymeasurement.repository.IQuantityMeasurementRepository;
-import com.app.quantitymeasurement.entity.QuantityMeasurementEntity;
+import com.app.quantitymeasurement.repository.QuantityMeasurementRepository;
+import com.app.quantitymeasurement.model.QuantityMeasurementEntity;
+import com.app.quantitymeasurement.model.QuantityDTO;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+
+@Service
 
 public class QuantityMeasurementServiceImpl
         implements IQuantityMeasurementService {
 	
-	private final IQuantityMeasurementRepository repository;
-	public QuantityMeasurementServiceImpl(
-	        IQuantityMeasurementRepository repository) {
-
-	    this.repository = repository;
-	}
-	
+	@Autowired
+	private QuantityMeasurementRepository repository;
+//	private final IQuantityMeasurementRepository repository;
+//	public QuantityMeasurementServiceImpl(
+//	        IQuantityMeasurementRepository repository) {
+//
+//	    this.repository = repository;
+//	}
+//	
 	private enum ArithmeticOperation {
 
 	    ADD {
@@ -46,7 +54,40 @@ public class QuantityMeasurementServiceImpl
 
 	    abstract double apply(double left, double right);
 	}
-	
+	@Override
+	public List<QuantityMeasurementEntity>
+	getHistoryByOperation(
+	        String operation){
+
+	    return repository
+	            .findByOperation(operation);
+	}
+
+	@Override
+	public List<QuantityMeasurementEntity>
+	getHistoryByMeasurementType(
+	        String type){
+
+	    return repository
+	            .findByThisMeasurementType(type);
+	}
+
+	@Override
+	public Long getOperationCount(
+	        String operation){
+
+	    return repository
+	            .countByOperationAndIsErrorFalse(
+	                    operation);
+	}
+
+	@Override
+	public List<QuantityMeasurementEntity>
+	getErrorHistory(){
+
+	    return repository
+	            .findByIsErrorTrue();
+	}
  	
 	private <U extends IMeasurable> boolean compare(
 	        Quantity<U> quantity1,
@@ -340,5 +381,7 @@ public class QuantityMeasurementServiceImpl
 	    repository.save(entity);
 
 	    return result;
+	    
+	    
 	}
 }

@@ -1,12 +1,16 @@
-package com.app.quantitymeasurement.dto;
+package com.app.quantitymeasurement.model;
 
 import com.app.quantitymeasurement.IMeasurable;
 
+import jakarta.validation.constraints.NotNull;
+
 public class QuantityDTO<U extends IMeasurable> {
 
-    private double value;
+	@NotNull
+	private Double value;
 
-    private U unit;
+	@NotNull
+	private U unit;
 
     public QuantityDTO() {
     }

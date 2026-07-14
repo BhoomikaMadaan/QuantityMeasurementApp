@@ -47,11 +47,11 @@ public class QuantityMeasurementEntity implements Serializable {
     private boolean isError;
     private String errorMessage;
 
-//    /**
-//     * Default constructor
-//     */
-//    public QuantityMeasurementEntity() {
-//    }
+    /**
+     * Default constructor
+     */
+    public QuantityMeasurementEntity() {
+    }
 
     /**
      * Constructor for comparison operations

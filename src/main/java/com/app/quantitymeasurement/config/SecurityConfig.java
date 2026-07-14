@@ -1,36 +1,90 @@
 package com.app.quantitymeasurement.config;
 
+
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
 
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.config.Customizer;
 @Configuration
 public class SecurityConfig {
 
+    private final OAuth2SuccessHandler successHandler;
+
+    public SecurityConfig(
+            OAuth2SuccessHandler successHandler) {
+
+        this.successHandler =
+                successHandler;
+    }
+
+    
     @Bean
     SecurityFilterChain securityFilterChain(
             HttpSecurity http)
             throws Exception {
 
         http
-            .authorizeHttpRequests(auth -> auth
-                    .requestMatchers(
-                            "/h2-console/**",
-                            "/swagger-ui/**",
-                            "/v3/api-docs/**")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated())
-            .csrf(csrf -> csrf
-                    .ignoringRequestMatchers(
-                            "/h2-console/**"))
-            .headers(headers -> headers
-                    .frameOptions(
-                            frame -> frame.disable()))
-            .httpBasic(Customizer.withDefaults());
+                .csrf(
+                        csrf -> csrf.disable())
+                .cors(Customizer.withDefaults()) 
+
+                .authorizeHttpRequests(
+                        auth -> auth
+
+                                .requestMatchers(
+                                        "/swagger-ui/**",
+                                        "/v3/api-docs/**",
+                                        "/h2-console/**",
+                                        "/api/auth/**")
+                                .permitAll()
+
+                                .anyRequest()
+                                .authenticated())
+
+                .oauth2Login(
+                        oauth -> oauth
+                                .successHandler(
+                                        successHandler))
+        .oauth2ResourceServer(
+                oauth ->
+                        oauth.jwt(
+                                Customizer.withDefaults()));
+
+        http.headers(
+                headers -> headers
+                        .frameOptions(
+                                frame ->
+                                        frame.disable()));
+        
 
         return http.build();
     }
-}
+    
+    @Bean
+    public CorsConfigurationSource
+    corsConfigurationSource() {
+
+        CorsConfiguration config =
+                new CorsConfiguration();
+
+        config.addAllowedOrigin("*");
+        config.addAllowedMethod("*");
+        config.addAllowedHeader("*");
+
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
+
+        source.registerCorsConfiguration(
+                "/**",
+                config);
+
+        return source;
+    }
+    }

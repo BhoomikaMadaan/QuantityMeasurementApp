@@ -1,1 +1,17 @@
 /target/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# H2 Database
+*.mv.db
+*.lock.db
+
+# Local secrets
+application-local.properties
+.env

@@ -1,22 +1,25 @@
 package com.app.quantitymeasurement.model;
 
-import com.app.quantitymeasurement.IMeasurable;
+public class QuantityRequestDTO {
 
-import lombok.Data;
+    private QuantityRequestItemDTO quantity1;
+    private QuantityRequestItemDTO quantity2;
 
-@Data
-public class QuantityRequestDTO<U extends IMeasurable> {
-
-    private QuantityDTO<?> quantity1;
-
-    private QuantityDTO<?> quantity2;
-    
-    public QuantityDTO<?> getQuantity1() {
+    public QuantityRequestItemDTO getQuantity1() {
         return quantity1;
     }
 
-    public QuantityDTO<?> getQuantity2() {
+    public void setQuantity1(
+            QuantityRequestItemDTO quantity1) {
+        this.quantity1 = quantity1;
+    }
+
+    public QuantityRequestItemDTO getQuantity2() {
         return quantity2;
     }
 
+    public void setQuantity2(
+            QuantityRequestItemDTO quantity2) {
+        this.quantity2 = quantity2;
+    }
 }

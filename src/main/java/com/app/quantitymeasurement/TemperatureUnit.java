@@ -67,9 +67,7 @@ public enum TemperatureUnit
             String operation) {
 
         throw new UnsupportedOperationException(
-                "Temperature does not support "
-                        + operation
-                        + " operation");
+                "Arithmetic operations are not supported for Temperature measurements.");
     }
 
     @Override

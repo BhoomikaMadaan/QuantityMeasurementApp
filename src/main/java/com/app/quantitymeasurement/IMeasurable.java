@@ -52,7 +52,15 @@ public interface IMeasurable {
      */
     default String getMeasurementType() {
 
-        return this.getClass().getSimpleName();
+        if (this instanceof Enum<?>) {
+
+            return ((Enum<?>) this)
+                    .getDeclaringClass()
+                    .getSimpleName();
+        }
+
+        return this.getClass()
+                .getSimpleName();
     }
 
     /**

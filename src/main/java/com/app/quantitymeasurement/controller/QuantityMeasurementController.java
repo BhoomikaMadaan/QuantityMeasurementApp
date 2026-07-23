@@ -17,6 +17,7 @@ import com.app.quantitymeasurement.model.QuantityRequestDTO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
+import com.app.quantitymeasurement.util.UnitResolver;
 
 
 @RestController
@@ -73,43 +74,96 @@ public class QuantityMeasurementController {
     }
     
     @PostMapping("/compare")
-    @SuppressWarnings("unchecked")
     public boolean compare(
-         @Valid   @RequestBody QuantityRequestDTO request){
+            @RequestBody QuantityRequestDTO request){
 
-    	return service.compare(
-    	        (QuantityDTO) request.getQuantity1(),
-    	        (QuantityDTO) request.getQuantity2());
+        System.out.println("INSIDE CONTROLLER");
+
+        QuantityDTO q1 =
+                new QuantityDTO(
+                        request.getQuantity1().getValue(),
+                        UnitResolver.getUnit(
+                                request.getQuantity1().getUnit()));
+
+        QuantityDTO q2 =
+                new QuantityDTO(
+                        request.getQuantity2().getValue(),
+                        UnitResolver.getUnit(
+                                request.getQuantity2().getUnit()));
+
+        return service.compare(
+                q1,
+                q2);
     }
-    
+    @PostMapping("/convert")
+    public Quantity<?> convert(
+            @RequestBody QuantityRequestDTO request) {
+
+        QuantityDTO q1 =
+                new QuantityDTO(
+                        request.getQuantity1().getValue(),
+                        UnitResolver.getUnit(
+                                request.getQuantity1().getUnit()));
+
+        return service.convert(
+                q1,
+                UnitResolver.getUnit(
+                        request.getQuantity2().getUnit()));
+    }
     @PostMapping("/add")
-    @SuppressWarnings("unchecked")
     public Quantity<?> add(
-    		@Valid    @RequestBody QuantityRequestDTO request){
+            @RequestBody QuantityRequestDTO request) {
 
-        return service.add(
-        		(QuantityDTO) request.getQuantity1(),
-    	        (QuantityDTO) request.getQuantity2());
+        QuantityDTO q1 =
+                new QuantityDTO(
+                        request.getQuantity1().getValue(),
+                        UnitResolver.getUnit(
+                                request.getQuantity1().getUnit()));
+
+        QuantityDTO q2 =
+                new QuantityDTO(
+                        request.getQuantity2().getValue(),
+                        UnitResolver.getUnit(
+                                request.getQuantity2().getUnit()));
+
+        return service.add(q1, q2);
     }
-    
     @PostMapping("/subtract")
-    @SuppressWarnings("unchecked")
     public Quantity<?> subtract(
-    		@Valid    @RequestBody QuantityRequestDTO request){
+            @RequestBody QuantityRequestDTO request) {
 
-        return service.subtract(
-        		(QuantityDTO) request.getQuantity1(),
-    	        (QuantityDTO) request.getQuantity2());
+        QuantityDTO q1 =
+                new QuantityDTO(
+                        request.getQuantity1().getValue(),
+                        UnitResolver.getUnit(
+                                request.getQuantity1().getUnit()));
+
+        QuantityDTO q2 =
+                new QuantityDTO(
+                        request.getQuantity2().getValue(),
+                        UnitResolver.getUnit(
+                                request.getQuantity2().getUnit()));
+
+        return service.subtract(q1, q2);
     }
     
     @PostMapping("/divide")
-    @SuppressWarnings("unchecked")
     public double divide(
-    		@Valid     @RequestBody QuantityRequestDTO request){
+            @RequestBody QuantityRequestDTO request) {
 
-        return service.divide(
-        		(QuantityDTO) request.getQuantity1(),
-    	        (QuantityDTO) request.getQuantity2());
+        QuantityDTO q1 =
+                new QuantityDTO(
+                        request.getQuantity1().getValue(),
+                        UnitResolver.getUnit(
+                                request.getQuantity1().getUnit()));
+
+        QuantityDTO q2 =
+                new QuantityDTO(
+                        request.getQuantity2().getValue(),
+                        UnitResolver.getUnit(
+                                request.getQuantity2().getUnit()));
+
+        return service.divide(q1, q2);
     }
 
     /**

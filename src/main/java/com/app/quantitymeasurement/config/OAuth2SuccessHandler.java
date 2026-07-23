@@ -49,9 +49,11 @@ public class OAuth2SuccessHandler
                         email,
                         name,
                         picture);
-        response.setContentType("text/plain");
-
-        response.getWriter()
-                .write("JWT Token : " + token);
+//        response.setContentType("text/plain");
+//
+//        response.getWriter()
+//                .write("JWT Token : " + token);
+        response.sendRedirect(
+                "/?token=" + token);
     }
 }

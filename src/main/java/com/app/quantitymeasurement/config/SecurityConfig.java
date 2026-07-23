@@ -37,25 +37,13 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(
                         auth -> auth
-
-                                .requestMatchers(
-                                        "/swagger-ui/**",
-                                        "/v3/api-docs/**",
-                                        "/h2-console/**",
-                                        "/api/auth/**")
-                                .permitAll()
-
                                 .anyRequest()
-                                .authenticated())
+                                .permitAll())
 
                 .oauth2Login(
                         oauth -> oauth
                                 .successHandler(
-                                        successHandler))
-        .oauth2ResourceServer(
-                oauth ->
-                        oauth.jwt(
-                                Customizer.withDefaults()));
+                                        successHandler));
 
         http.headers(
                 headers -> headers

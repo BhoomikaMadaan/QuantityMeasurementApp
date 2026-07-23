@@ -181,24 +181,35 @@ public class Quantity<U extends IMeasurable> {
          * Convert to target unit
          */
         public Quantity<U> convertTo(
-                        U targetUnit) {
+                U targetUnit) {
 
-                if (targetUnit == null) {
+            if (targetUnit == null) {
 
-                        throw new IllegalArgumentException(
-                                        "Target unit cannot be null");
-                }
+                throw new IllegalArgumentException(
+                        "Target unit cannot be null");
+            }
 
-                double baseValue = this.convertToBaseUnit();
+            if (!this.unit
+                    .getMeasurementType()
+                    .equals(
+                            targetUnit
+                                    .getMeasurementType())) {
 
-                double convertedValue = targetUnit.convertFromBaseUnit(
-                                baseValue);
+                throw new IllegalArgumentException(
+                        "Incompatible measurement categories");
+            }
 
-                return new Quantity<>(
-                                convertedValue,
-                                targetUnit);
+            double baseValue =
+                    this.convertToBaseUnit();
+
+            double convertedValue =
+                    targetUnit.convertFromBaseUnit(
+                            baseValue);
+
+            return new Quantity<>(
+                    convertedValue,
+                    targetUnit);
         }
-
         /**
          * UC-13 refactor add method to use performBaseArithmetic for addition
          */

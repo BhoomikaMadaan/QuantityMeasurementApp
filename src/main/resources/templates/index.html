@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+Quantity Measurement
+</title>
+
+<link rel="stylesheet"
+      href="/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+Welcome To Quantity Measurement
+
+</header>
+
+<h5>
+CHOOSE TYPE
+</h5>
+
+<div class="type-container">
+
+<div class="card active"
+     onclick="selectType('length',this)">
+
+<img src="/images/length.png">
+
+<p>Length</p>
+
+</div>
+
+<div class="card"
+     onclick="selectType('weight',this)">
+
+<img src="/images/weight.png">
+
+<p>Weight</p>
+
+</div>
+
+<div class="card"
+     onclick="selectType('temperature',this)">
+
+<img src="/images/temp.png">
+
+<p>Temperature</p>
+
+</div>
+
+<div class="card"
+     onclick="selectType('volume',this)">
+
+<img src="/images/volume.png">
+
+<p>Volume</p>
+
+</div>
+
+</div>
+
+<h5>
+CHOOSE ACTION
+</h5>
+
+<div class="actions">
+
+<button
+class="active"
+onclick="setAction('compare',this)">
+
+Comparison
+
+</button>
+
+<button
+onclick="setAction('convert',this)">
+
+Conversion
+
+</button>
+
+<button
+onclick="setAction('add',this)">
+
+Addition
+
+</button>
+
+<button
+onclick="setAction('subtract',this)">
+
+Subtraction
+
+</button>
+
+<button
+onclick="setAction('divide',this)">
+
+Division
+
+</button>
+
+</div>
+
+<div class="inputs">
+
+<div class="input-box">
+
+<h4 id="label1">
+
+First Quantity
+
+</h4>
+
+<input
+id="value1"
+type="number"
+placeholder="1">
+
+<select id="unit1">
+
+</select>
+
+</div>
+
+<div
+class="input-box"
+id="secondBox">
+
+<h4 id="label2">
+
+Second Quantity
+
+</h4>
+
+<input
+id="value2"
+type="number"
+placeholder="1000">
+
+<select id="unit2">
+
+</select>
+
+</div>
+
+</div>
+
+<div class="result-box">
+
+<h3>
+
+RESULT
+
+</h3>
+
+<h1 id="result">
+
+0
+
+</h1>
+
+</div>
+
+<button
+class="calculate-btn"
+onclick="calculate()">
+
+CALCULATE
+
+</button>
+
+<iframe
+src="https://www.wikipedia.org"
+width="100%"
+height="250">
+
+</iframe>
+
+</div>
+
+<script src="/js/app.js"></script>
+
+</body>
+
+</html>

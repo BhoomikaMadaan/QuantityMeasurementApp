@@ -53,7 +53,6 @@ public class OAuth2SuccessHandler
 //
 //        response.getWriter()
 //                .write("JWT Token : " + token);
-        response.sendRedirect(
-                "/?token=" + token);
+        response.sendRedirect("http://localhost:5173/?token=" + token);
     }
 }
